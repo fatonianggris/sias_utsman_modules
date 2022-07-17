@@ -1,6 +1,7 @@
 <?php
 
-class AuthModel extends CI_Model {
+class AuthModel extends CI_Model
+{
 
     private $table_student = 'siswa';
     private $table_general_page = 'general_page';
@@ -9,15 +10,17 @@ class AuthModel extends CI_Model {
     //
     //-------------------------------AUTH------------------------------//
     //
-    
 
-     public function check_nis_student($value = '') {
-        $this->db->where('nis', $value['nis']);
+
+    public function check_nomor_student($value = '')
+    {
+        $this->db->where('nomor_pembayaran_dpb', $value['nomor_pembayaran_dpb']);
         $sql = $this->db->get($this->table_student);
         return $sql->result();
     }
 
-    public function data_student($value = '') {
+    public function data_student($value = '')
+    {
 
         $this->db->select("s.id_siswa,
                             s.nisn,
@@ -48,9 +51,9 @@ class AuthModel extends CI_Model {
                             s.status_transisi,
                             s.status_siswa,
                             t.nama_tingkat,
-                            COALESCE(k.nama_kelas, 'KOSONG') as nama_kelas");
+                            COALESCE(k.nama_kelas, '-') as nama_kelas");
         $this->db->from('siswa s');
-        $this->db->where('s.nis', $value['nis']);
+        $this->db->where('s.nomor_pembayaran_dpb', $value['nomor_pembayaran_dpb']);
         $this->db->join('kelas k', 's.id_kelas = k.id_kelas', 'left');
         $this->db->join('tingkat t', 's.id_tingkat = t.id_tingkat', 'left');
 
@@ -58,7 +61,8 @@ class AuthModel extends CI_Model {
         return $sql->result();
     }
 
-    public function get_page() {
+    public function get_page()
+    {
 
         $this->db->select('*');
         $this->db->where('id_general_page', 1);
@@ -66,7 +70,8 @@ class AuthModel extends CI_Model {
         return $sql->result();
     }
 
-    public function get_contact() {
+    public function get_contact()
+    {
 
         $this->db->select('*');
         $this->db->where('id_kontak', 1);
@@ -74,20 +79,22 @@ class AuthModel extends CI_Model {
         return $sql->result();
     }
 
-    public function check_email_account($email = '') {
-        $this->db->where('email', $email);
+    public function check_nomor_pembayaran_student($nomor = '')
+    {
+        $this->db->where('nomor_pembayaran_dpb', $nomor);
         $sql = $this->db->get($this->table_student);
         return $sql->result();
     }
 
-    public function reset_account_password($email = '', $password = '') {
+    public function reset_account_password($nomor = '', $password = '')
+    {
         $this->db->trans_begin();
 
         $data = array(
             'password' => password_hash(paramEncrypt($password), PASSWORD_DEFAULT, array('cost' => 12)),
         );
 
-        $this->db->where('email', $email);
+        $this->db->where('nomor_pembayaran_dpb', $nomor);
         $this->db->update($this->table_student, $data);
 
         if ($this->db->trans_status() === false) {
@@ -101,5 +108,3 @@ class AuthModel extends CI_Model {
 
     //----------------------------------------------------------------//
 }
-
-?>
