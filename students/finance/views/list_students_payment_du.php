@@ -280,7 +280,6 @@
                                                 <th>NIS</th>
                                                 <th>Jenjang</th>
                                                 <th>Tingkat</th>
-                                                <th>Kelas</th>
                                                 <th>Tipe Pembayran</th>
                                                 <th>Nominal</th>
                                                 <th>Waktu Transaksi</th>
@@ -309,16 +308,11 @@
                                                             <?php echo $value->nis; ?>
                                                         </td>
                                                         <td class="font-weight-bolder">
-                                                            <?php echo $value->level_tingkat; ?>
+                                                            <?php echo substr($value->informasi, 0, 2); ?>
                                                         </td>
                                                         <td class="font-weight-bolder">
                                                             <span class="label label-lg font-weight-bold label-light-default label-inline">
-                                                                <?php echo $value->nama_tingkat; ?>
-                                                            </span>
-                                                        </td>
-                                                        <td class="font-weight-bolder">
-                                                            <span class="label label-lg font-weight-bold label-light-default label-inline">
-                                                                <?php echo strtoupper(strtolower($value->nama_kelas)); ?>
+                                                                <?php echo $value->informasi; ?>
                                                             </span>
                                                         </td>
                                                         <td class="font-weight-bolder">

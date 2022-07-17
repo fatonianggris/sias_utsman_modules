@@ -218,17 +218,18 @@
                                     <?php } ?>
                                     <div class="mt-2">
                                         <span class="label label-lg font-weight-bolder label-light-warning label-inline">
-                                            <?php
-                                            if ($user[0]->level_tingkat == 1) {
-                                                echo 'KB';
-                                            } else if ($user[0]->level_tingkat == 2) {
-                                                echo 'TK';
-                                            } else if ($user[0]->level_tingkat == 3) {
-                                                echo 'SD';
-                                            } else if ($user[0]->level_tingkat == 4) {
-                                                echo 'SMP';
-                                            }
-                                            ?>
+                                            <!-- <?php
+                                                    if ($user[0]->level_tingkat == 1) {
+                                                        echo 'KB';
+                                                    } else if ($user[0]->level_tingkat == 2) {
+                                                        echo 'TK';
+                                                    } else if ($user[0]->level_tingkat == 3) {
+                                                        echo 'SD';
+                                                    } else if ($user[0]->level_tingkat == 4) {
+                                                        echo 'SMP';
+                                                    }
+                                                    ?> -->
+                                            -
                                         </span>
                                         <span class="label label-lg font-weight-bolder label-light-success label-inline">
                                             <?php
