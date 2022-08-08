@@ -1,21 +1,24 @@
 <?php
 
-class PresenceModel extends CI_Model {
+class PresenceModel extends CI_Model
+{
 
-    private $table_schoolyear = 'tahun_ajaran';
-    private $table_present = 'absensi_pegawai';
+	private $table_schoolyear = 'tahun_ajaran';
+	private $table_present = 'absensi_pegawai';
 
-    public function get_schoolyear() {
-        $this->db->select('*');
-        $this->db->group_by('tahun_awal');
-        $this->db->order_by('tahun_awal', 'ASC');
+	public function get_schoolyear()
+	{
+		$this->db->select('*');
+		$this->db->group_by('tahun_awal');
+		$this->db->order_by('tahun_awal', 'ASC');
 
-        $sql = $this->db->get($this->table_schoolyear);
-        return $sql->result();
-    }
+		$sql = $this->db->get($this->table_schoolyear);
+		return $sql->result();
+	}
 
-    public function get_present_by_id($id_pegawai = '') {
-        $this->db->select("a.*,
+	public function get_present_by_id($id_pegawai = '')
+	{
+		$this->db->select("a.*,
                             p.nama_lengkap,
                             p.foto_pegawai_thumb,
                             p.nip,
@@ -25,66 +28,66 @@ class PresenceModel extends CI_Model {
                             ta.tahun_awal,
                             ta.tahun_akhir");
 
-        $this->db->from('absensi_pegawai a');
+		$this->db->from('absensi_pegawai a');
 
-        $this->db->join('pegawai p', 'a.id_pegawai = p.id_pegawai', 'left');
-        $this->db->join('tahun_ajaran ta', 'a.th_ajaran = ta.id_tahun_ajaran', 'left');
+		$this->db->join('pegawai p', 'a.id_pegawai = p.id_pegawai', 'left');
+		$this->db->join('tahun_ajaran ta', 'a.th_ajaran = ta.id_tahun_ajaran', 'left');
 
-        $this->db->where('a.id_pegawai', $id_pegawai);
-        $this->db->order_by('a.inserted_at', 'ASC');
+		$this->db->where('a.id_pegawai', $id_pegawai);
+		$this->db->order_by('a.inserted_at', 'ASC');
 
-        $sql = $this->db->get();
-        return $sql->result();
-    }
+		$sql = $this->db->get();
+		return $sql->result();
+	}
 
-    public function get_present_all_day($level_jabatan = '', $level_tingkat = '') {
+	public function get_present_all_day($level_jabatan = '', $level_tingkat = '')
+	{
 
-        if ($level_jabatan == 0) {
+		if ($level_jabatan == 0) {
 
-            $this->db->select("a.*,
+			$this->db->select("a.*,
                             p.nama_lengkap,
                             p.foto_pegawai_thumb,
                             p.nip,
                             DATE(a.inserted_at) AS tgl_post,
                             DATE_FORMAT(a.inserted_at, '%d/%m/%Y') AS tgl_format,
                             DATE_FORMAT(a.updated_at, '%d/%m/%Y') AS tgl_update,,
-                            ta.tahun_awal,
-                            ta.tahun_akhir");
+                            CONCAT(ta.tahun_awal,'-',ta.tahun_akhir) AS tahun_ajaran");
 
-            $this->db->from('absensi_pegawai a');
+			$this->db->from('absensi_pegawai a');
 
-            $this->db->join('pegawai p', 'a.id_pegawai = p.id_pegawai', 'left');
-            $this->db->join('tahun_ajaran ta', 'a.th_ajaran = ta.id_tahun_ajaran', 'left');
-        } else {
+			$this->db->join('pegawai p', 'a.id_pegawai = p.id_pegawai', 'left');
+			$this->db->join('tahun_ajaran ta', 'a.th_ajaran = ta.id_tahun_ajaran', 'left');
+		} else {
 
-            $this->db->select("a.*,
+			$this->db->select("a.*,
                             p.nama_lengkap,
                             p.foto_pegawai_thumb,
                             p.nip,
                             DATE(a.inserted_at) AS tgl_post,
                             DATE_FORMAT(a.inserted_at, '%d/%m/%Y') AS tgl_format,
-                            DATE_FORMAT(a.updated_at, '%d/%m/%Y') AS tgl_update,,
-                            ta.tahun_awal,
-                            ta.tahun_akhir");
+                            DATE_FORMAT(a.updated_at, '%d/%m/%Y') AS tgl_update,
+                            CONCAT(ta.tahun_awal,'-',ta.tahun_akhir) AS tahun_ajaran");
 
-            $this->db->from('absensi_pegawai a');
+			$this->db->from('absensi_pegawai a');
 
-            $this->db->join('pegawai p', 'a.id_pegawai = p.id_pegawai', 'left');
-            $this->db->join('tahun_ajaran ta', 'a.th_ajaran = ta.id_tahun_ajaran', 'left');
-            $this->db->where('p.level_tingkat', $level_tingkat);
-        }
+			$this->db->join('pegawai p', 'a.id_pegawai = p.id_pegawai', 'left');
+			$this->db->join('tahun_ajaran ta', 'a.th_ajaran = ta.id_tahun_ajaran', 'left');
+			$this->db->where('p.level_tingkat', $level_tingkat);
+		}
 
-        $this->db->order_by('a.inserted_at', 'ASC');
+		$this->db->order_by('a.inserted_at', 'DESC');
 
-        $sql = $this->db->get();
-        return $sql->result();
-    }
+		$sql = $this->db->get();
+		return $sql->result_array();
+	}
 
-    public function get_present_all_month($level_jabatan = '', $level_tingkat = '') {
+	public function get_present_all_month($level_jabatan = '', $level_tingkat = '')
+	{
 
-        if ($level_jabatan == 0) {
+		if ($level_jabatan == 0) {
 
-            $sql = $this->db->query("SELECT
+			$sql = $this->db->query("SELECT
                                         p.nama_lengkap,
                                         p.nip,
                                         p.id_pegawai,
@@ -99,7 +102,7 @@ class PresenceModel extends CI_Model {
                                         IFNULL(tm.telat_masuk, 0) AS telat_masuk,
                                         IFNULL(tp.telat_pulang, 0) AS telat_pulang,
                                         b.bulan,
-                                        CONCAT(ta.tahun_awal,'/',ta.tahun_akhir,' ', ta.semester) AS tahun_ajaran
+                                        CONCAT(ta.tahun_awal,'-',ta.tahun_akhir) AS tahun_ajaran
                                     FROM
                                         (
                                         SELECT
@@ -232,9 +235,9 @@ class PresenceModel extends CI_Model {
                                         p.id_pegawai = tp.id_pegawai AND b.bulan = tp.bulan
                                     LEFT JOIN tahun_ajaran ta ON
                                         b.th_ajaran = ta.id_tahun_ajaran");
-        } else {
+		} else {
 
-            $sql = $this->db->query("SELECT
+			$sql = $this->db->query("SELECT
                                         p.nama_lengkap,
                                         p.nip,
                                         p.foto_pegawai_thumb,
@@ -249,7 +252,7 @@ class PresenceModel extends CI_Model {
                                         IFNULL(tm.telat_masuk, 0) AS telat_masuk,
                                         IFNULL(tp.telat_pulang, 0) AS telat_pulang,
                                         b.bulan,
-                                        CONCAT(ta.tahun_awal,'/',ta.tahun_akhir,' ', ta.semester) AS tahun_ajaran
+                                        CONCAT(ta.tahun_awal,'-',ta.tahun_akhir) AS tahun_ajaran
                                     FROM
                                         (
                                         SELECT
@@ -382,39 +385,38 @@ class PresenceModel extends CI_Model {
                                         p.id_pegawai = tp.id_pegawai AND b.bulan = tp.bulan
                                     LEFT JOIN tahun_ajaran ta ON
                                         b.th_ajaran = ta.id_tahun_ajaran
-                                    WHERE 
-                                    p.level_tingkat = $level_tingkat");
-        }
+                                    WHERE
+                                   		p.level_tingkat = $level_tingkat");
+		}
 
 
 
-        return $sql->result();
-    }
+		return $sql->result_array();
+	}
 
-    public function get_employe_present_id($id_present = '') {
-        $this->db->select("a.*, ta.semester,
+	public function get_employe_present_id($id_present = '')
+	{
+		$this->db->select("a.*, ta.semester,
                                 p.nama_lengkap,
                                 p.nip,
                                 p.level_tingkat,
                                 CONCAT(ta.tahun_awal,'/',ta.tahun_akhir) AS tahun_ajaran, 
                                 DATE(a.inserted_at) AS tgl_asli,
                                 DATE_FORMAT(a.inserted_at, '%d/%m/%Y') AS tgl_post,
-                                DATE_FORMAT(a.updated_at, '%d/%m/%Y') AS tgl_update,                          
+                                DATE_FORMAT(a.updated_at, '%d/%m/%Y') AS tgl_update,
                          ");
-        $this->db->from('absensi_pegawai a');
+		$this->db->from('absensi_pegawai a');
 
-        $this->db->join('pegawai p', 'p.id_pegawai = a.id_pegawai', 'left');
-        $this->db->join('tahun_ajaran ta', 'a.th_ajaran = ta.id_tahun_ajaran', 'left');
-        $this->db->where('a.id_absensi_pegawai', $id_present);
+		$this->db->join('pegawai p', 'p.id_pegawai = a.id_pegawai', 'left');
+		$this->db->join('tahun_ajaran ta', 'a.th_ajaran = ta.id_tahun_ajaran', 'left');
+		$this->db->where('a.id_absensi_pegawai', $id_present);
 
-        $this->db->order_by('a.inserted_at', 'ASC');
+		$this->db->order_by('a.inserted_at', 'ASC');
 
-        $sql = $this->db->get();
-        return $sql->result();
-    }
+		$sql = $this->db->get();
+		return $sql->result();
+	}
 
-    //-----------------------------------------------------------------------//
-//
+	//-----------------------------------------------------------------------//
+	//
 }
-
-?>
