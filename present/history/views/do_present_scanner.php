@@ -19,7 +19,6 @@
 	<link href="<?php echo base_url(); ?>assets/present/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 	<!--end::Global Theme Styles-->
 	<link href="<?php echo base_url(); ?>assets/present/dist/assets/css/pages/fonts/dropify.css" rel="stylesheet" type="text/css" />
-
 	<!--begin::Layout Themes(used by all pages)-->
 	<!--end::Layout Themes-->
 	<link rel="shortcut icon" href="<?php echo base_url(); ?>assets/present/dist/assets/media/logos/favicon.ico" />
@@ -149,104 +148,81 @@
 									</div>
 								</div>
 								<!--begin::Form-->
-
+								<input type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 								<?php if (new DateTime() < new DateTime("12:00:00")) { ?>
 									<?php if ($present_now[0]->status_absensi_masuk == 0) { ?>
-										<form class="form" novalidate="novalidate" action="<?php echo site_url('present/history/present/post_present_in'); ?>" enctype="multipart/form-data" method="post" id="kt_present_form">
-											<?php if ($diff_in > minutes($present_config[0]->toleransi_absen)) { ?>
-												<input type="hidden" name="jam_telat" value="<?php echo $diff_in; ?>">
-											<?php } else { ?>
-												<input type="hidden" name="jam_telat" value="0">
-											<?php } ?>
+										<input type="hidden" id="status_absensi" value="absensi_masuk">
+										<!-- <form class="form" novalidate="novalidate" action="<?php echo site_url('present/history/present/post_present_in'); ?>" enctype="multipart/form-data" method="post" id="kt_present_form"> -->
+										<?php if ($diff_in > minutes($present_config[0]->toleransi_absen)) { ?>
+											<input type="hidden" id="jam_telat" value="<?php echo $diff_in; ?>">
+										<?php } else { ?>
+											<input type="hidden" id="jam_telat" value="0">
 										<?php } ?>
-									<?php } else { ?>
-										<?php if ($present_now[0]->status_absensi_pulang == 0) { ?>
-											<form class="form" novalidate="novalidate" action="<?php echo site_url('present/history/present/post_present_out'); ?>" enctype="multipart/form-data" method="post" id="kt_present_form">
-												<?php if ($diff_out > minutes($present_config[0]->toleransi_absen)) { ?>
-													<input type="hidden" name="jam_telat" value="<?php echo $diff_out; ?>">
-												<?php } else { ?>
-													<input type="hidden" name="jam_telat" value="0">
-												<?php } ?>
-											<?php } ?>
+									<?php } ?>
+								<?php } else { ?>
+									<?php if ($present_now[0]->status_absensi_pulang == 0) { ?>
+										<input type="hidden" id="status_absensi" value="absensi_pulang">
+										<!-- <form class="form" novalidate="novalidate" action="<?php echo site_url('present/history/present/post_present_out'); ?>" enctype="multipart/form-data" method="post" id="kt_present_form"> -->
+										<?php if ($diff_out > minutes($present_config[0]->toleransi_absen)) { ?>
+											<input type="hidden" id="jam_telat" value="<?php echo $diff_out; ?>">
+										<?php } else { ?>
+											<input type="hidden" id="jam_telat" value="0">
 										<?php } ?>
-										<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-
-										<div class="card-body">
-											<div class="row">
-												<div class="col-lg-12">
-													<div class="row ">
-														<div class="col-lg-12 col-12 ">
-															<h1 class="text-center text-warning font-weight-boldest mb-3">
-																STATUS ABSENSI
-															</h1>
-														</div>
-														<div class="col-lg-12 text-center col-12 mb-5">
-															<p class="font-weight-boldest display-3 mb-1 text-success text-center">HADIR</p>
-														</div>
-														<div class="col-lg-12 col-6">
-															<div class="form-group">
-																<label>Jam Absen</label>
-																<p class="font-weight-boldest text-dark display-4">
-																	<?php
-																	if (new DateTime() < new DateTime("12:00:00")) {
-																		echo $present_config[0]->start_absen;
-																	} else {
-																		echo $present_config[0]->end_absen;
-																	}
-																	?>
-																</p>
-															</div>
-														</div>
-														<div class="col-lg-12 col-6">
-															<div class="form-group">
-																<label>Waktu Sekarang</label>
-																<p class="font-weight-boldest text-danger display-4 " id="timestamp"></p>
-															</div>
-														</div>
-														<div class="col-lg-6 col-6">
-															<div class="form-group">
-																<label>Latitude</label>
-																<input type="text" name="lat" id="latitude" readonly class="form-control form-control-solid form-control-lg" placeholder="Isikan Lat" />
-																<span class="form-text text-dark"><b class="text-danger">*WAJIB DIISI, </b>Auto Generate</span>
-															</div>
-														</div>
-														<div class="col-lg-6 col-6">
-															<div class="form-group">
-																<label>Longtitude</label>
-																<input type="text" name="longt" id="longitude" readonly class="form-control form-control-solid  form-control-lg" placeholder="Isikan Longt" />
-																<span class="form-text text-dark"><b class="text-danger">*WAJIB DIISI, </b>Auto Generate</span>
-															</div>
-														</div>
-														<div class="col-lg-12 col-12 text-center">
-															<p class="text-danger font-weight-normal font-size-sm text-center">"Pastikan Anda berada di sekitar area Sekolah Utsman"</p>
-														</div>
-														<div class="col-lg-12 col-12">
-															<div class="form-group">
-																<div id="map-canvas"></div>
-																<a href="#" id="find-me" class="btn btn-danger font-weight-bold p-3 mt-4">
-																	<li class="fa fa-location-arrow"></li> Cari Lokasi
-																</a>
-															</div>
-															<p class="no-browser-support text-danger font-size-sm font-weight-bold mt-2">"Sorry, the Geolocation API isn't supported in Your browser."</p>
-														</div>
-														<?php if ($present_config[0]->status_absensi_selfie == 1) { ?>
-															<div class="col-lg-12 col-12 text-center">
-																<div class="form-group">
-																	<label class="font-weight-bolder font-size-h6">Bukti Absen</label>
-																	<input type="file" class="dropify_masuk" name="foto_bukti" data-max-file-size="5M" data-height="150" data-allowed-file-extensions="png jpg jpeg" />
-																	<span class="form-text text-dark"><b class="text-danger">*WAJIB DIISI, </b>Ambil/Unggah Foto Selfi Anda</span>
-																</div>
-															</div>
-														<?php } ?>
+									<?php } ?>
+								<?php } ?>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="row ">
+												<div class="col-lg-12 col-12 ">
+													<h1 class="text-center text-warning font-weight-boldest mb-1">
+														STATUS ABSENSI
+													</h1>
+												</div>
+												<div class="col-lg-12 text-center col-12 mb-2">
+													<p class="font-weight-boldest display-3 mb-1 text-success text-center">HADIR</p>
+												</div>
+												<div class="col-lg-12 col-6">
+													<div class="form-group">
+														<label>Jam Absen</label>
+														<p class="font-weight-boldest text-dark display-4">
+															<?php
+															if (new DateTime() < new DateTime("12:00:00")) {
+																echo $present_config[0]->start_absen;
+															} else {
+																echo $present_config[0]->end_absen;
+															}
+															?>
+														</p>
 													</div>
 												</div>
+												<div class="col-lg-12 col-6">
+													<div class="form-group">
+														<label>Waktu Sekarang</label>
+														<p class="font-weight-boldest text-danger display-4 " id="timestamp"></p>
+													</div>
+												</div>
+												<div class="col-lg-12 col-12">
+													<div class="form-group">
+														<div id="qr-reader" style="width: auto; height: auto;"></div>
+														<span class="form-text text-dark"><b class="text-danger">*WAJIB SCAN, </b>"Pastikan Anda Menggunakan QR Code Sekolah Utsman"</span>
+													</div>
+													<p class="text-danger font-weight-normal font-size-sm text-center"></p>
+												</div>
+												<?php if ($present_config[0]->status_absensi_selfie == 1) { ?>
+													<div class="col-lg-12 col-12 text-center">
+														<div class="form-group">
+															<label class="font-weight-bolder font-size-h6">Bukti Absen</label>
+															<input type="file" id="file_bukti" class="dropify_masuk" name="foto_bukti" data-max-file-size="5M" data-height="150" data-allowed-file-extensions="png jpg jpeg" />
+															<span class="form-text text-dark"><b class="text-danger">*WAJIB DIISI, </b>Ambil/Unggah Foto Selfi Anda</span>
+														</div>
+													</div>
+												<?php } ?>
 											</div>
 										</div>
-										<div class="card-footer">
-											<button id="kt_login_signin_submit" class="btn btn-success font-weight-bold px-9 py-4 col-lg-2 col-12">Hadir</button>
-										</div>
-											</form>
-											<!--end::Form-->
+									</div>
+								</div>
+								<!--end::Form-->
 							</div>
 							<!--end::Card-->
 						</div>
@@ -371,7 +347,151 @@
 	<script src="<?php echo base_url(); ?>assets/present/dist/assets/js/dropify.js"></script>
 	<script src="<?php echo base_url(); ?>assets/present/dist/assets/plugins/custom/whatsappchat/whatsapp-chat-support.js"></script>
 	<script src="<?php echo base_url(); ?>assets/present/dist/assets/js/pages/custom/login/do-present.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js">
+	<script src="<?php echo base_url(); ?>assets/present/dist/assets/js/pages/html5-qrcode.min.js"></script>
+	<script>
+		function sendDataPresent() {
+			navigator.permissions.query({
+				name: 'geolocation'
+			}).then((result) => {
+				if (result.state === 'granted') {
+					getLocation()
+				} else if (result.state === 'prompt') {
+					getLocation()
+				} else {
+					getLocation()
+				}
+				// Don't do anything if the permission was denied.
+			});
+		}
+
+		function getLocation() {
+
+			var jam_absen = document.getElementById('jam_telat').value;
+			var status_absensi = document.getElementById('status_absensi').value;
+
+			var status_file = "<?php echo $present_config[0]->status_absensi_selfie; ?>"
+
+			KTApp.blockPage({
+				overlayColor: '#FFA800',
+				state: 'warning',
+				size: 'lg',
+				opacity: 0.2,
+				message: 'Silahkan Tunggu...'
+			});
+
+			if (!navigator.geolocation) {
+				Swal.fire("Opps!", "Broswer Anda tidak Mendukung Geolocation.", "error");
+			} else {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var file_bukti;
+
+					if (status_file === 1) {
+						file_bukti = $('#file_bukti')[0].files;
+					} else {
+						file_bukti = null;
+					}
+
+					var csrfName = $('.txt_csrfname').attr('name');
+					var csrfHash = $('.txt_csrfname').val(); // CSRF hash
+					// Get the coordinates of the current possition.
+					var lat = position.coords.latitude;
+					var lng = position.coords.longitude;
+					// Sending coordinates
+					if (status_absensi === "absensi_pulang") {
+						$.ajax({
+							type: "post",
+							url: "<?php echo site_url("present/history/present/post_present_out") ?>",
+							data: {
+								lat: lat.toFixed(6),
+								longt: lng.toFixed(6),
+								foto_bukti: file_bukti,
+								jam_telat: jam_absen,
+								[csrfName]: csrfHash
+							},
+							dataType: 'html',
+							success: function(result) {
+								setTimeout(function() {
+									KTApp.unblockPage();
+									$(location).attr('href', '<?php echo site_url("present/dashboard") ?>');
+								}, 3000);
+							},
+							error: function(result) {
+								console.log(result);
+								Swal.fire("Opsss!", "Koneksi Internet Bermasalah.", "error");
+							}
+						});
+					} else if (status_absensi === "absensi_masuk") {
+						$.ajax({
+							type: "post",
+							url: "<?php echo site_url("present/history/present/post_present_in") ?>",
+							data: {
+								lat: lat.toFixed(6),
+								longt: lng.toFixed(6),
+								foto_bukti: file_bukti,
+								jam_telat: jam_absen,
+								[csrfName]: csrfHash
+							},
+							dataType: 'html',
+							success: function(result) {
+								setTimeout(function() {
+									KTApp.unblockPage();
+									$(location).attr('href', '<?php echo site_url("present/dashboard") ?>');
+								}, 3000);
+							},
+							error: function(result) {
+								console.log(result);
+								Swal.fire("Opsss!", "Koneksi Internet Bermasalah.", "error");
+							}
+						});
+					}
+
+				});
+			}
+		}
+	</script>
+	<script>
+		function docReady(fn) {
+			// see if DOM is already available
+			if (document.readyState === "complete" || document.readyState === "interactive") {
+				// call on next available tick
+				setTimeout(fn, 1);
+			} else {
+				document.addEventListener("DOMContentLoaded", fn);
+			}
+		}
+
+		docReady(function() {
+			var lastResult;
+			var qrcode_name = "<?php echo $present_config[0]->qrcode; ?>";
+
+			function onScanSuccess(decodedText, decodedResult) {
+
+				if (qrcode_name !== decodedText) {
+					Swal.fire("Opps!", "QR Code yang Anda Scan tidak teridentifikasi, Pastikan QR Code berasal dari Instansi/Admin.", "error");
+					if (html5QrcodeScanner.getState() !== Html5QrcodeScannerState.NOT_STARTED) {
+						html5QrcodeScanner.pause();
+					}
+					setTimeout(function() {
+						html5QrcodeScanner.resume();
+					}, 5000);
+				} else {
+					sendDataPresent();
+					if (html5QrcodeScanner.getState() !== Html5QrcodeScannerState.NOT_STARTED) {
+						html5QrcodeScanner.pause();
+					}
+					setTimeout(function() {
+						html5QrcodeScanner.resume();
+					}, 5000);
+				}
+
+			}
+
+			var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
+				fps: 10,
+				qrbox: 200,
+			});
+			html5QrcodeScanner.render(onScanSuccess);
+		});
 	</script>
 	<script>
 		$('.button-load').click(function() {
@@ -411,65 +531,7 @@
 			});
 		}
 	</script>
-	<script>
-		var findMeButton = $('#find-me');
-		var map;
-		// Check if the browser has support for the Geolocation API
-		if (!navigator.geolocation) {
-			findMeButton.addClass("disabled");
-			$('.no-browser-support').addClass("visible");
-		} else {
-			findMeButton.on('click', function(e) {
-				e.preventDefault();
-				navigator.geolocation.getCurrentPosition(function(position) {
-					// Get the coordinates of the current possition.
-					var lat = position.coords.latitude;
-					var lng = position.coords.longitude;
-					$('#latitude').val(lat.toFixed(6));
-					$('#longitude').val(lng.toFixed(6));
-					// Setup the click event listeners to geolocate user
-					geolocate();
-					KTApp.blockPage({
-						overlayColor: '#FFA800',
-						state: 'warning',
-						size: 'lg',
-						opacity: 0.2,
-						message: 'Silahkan Tunggu...'
-					});
-					setTimeout(function() {
-						KTApp.unblockPage();
-					}, 3000);
-				});
-			});
-		}
 
-		function initialize() {
-			var mapOptions = {
-				center: new google.maps.LatLng(10, 10),
-				zoom: 15
-			};
-			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-		}
-
-		function geolocate() {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function(position) {
-					var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-					// Create a marker and center map on user location
-					marker = new google.maps.Marker({
-						position: pos,
-						gestureHandling: 'greedy',
-						draggable: false,
-						animation: google.maps.Animation.DROP,
-						map: map
-					});
-					map.setCenter(pos);
-				});
-			}
-		}
-
-		initialize();
-	</script>
 </body>
 <!--end::Body-->
 

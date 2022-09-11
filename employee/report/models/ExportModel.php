@@ -1,108 +1,127 @@
 <?php
 
-class ExportModel extends CI_Model {
+class ExportModel extends CI_Model
+{
 
-    private $table_vemploye = 'view_pegawai';
-    private $table_evaluation = 'penilaian';
-    private $table_contact = 'kontak';
-    private $table_general_page = 'general_page';
+	private $table_vemploye = 'view_pegawai';
+	private $table_evaluation = 'penilaian';
+	private $table_contact = 'kontak';
+	private $table_general_page = 'general_page';
+	private $table_present = 'absen_config';
 
-    //
-    //------------------------------REPORT--------------------------------//
+	//
+	//------------------------------REPORT--------------------------------//
 
-    public function get_page() {
+	public function get_page()
+	{
 
-        $this->db->select('*');
-        $this->db->where('id_general_page', 1);
-        $sql = $this->db->get($this->table_general_page);
-        return $sql->result();
-    }
+		$this->db->select('*');
+		$this->db->where('id_general_page', 1);
+		$sql = $this->db->get($this->table_general_page);
+		return $sql->result();
+	}
 
-    public function get_contact() {
+	public function get_contact()
+	{
 
-        $this->db->select('*');
-        $this->db->where('id_kontak', 1);
-        $sql = $this->db->get($this->table_contact);
-        return $sql->result();
-    }
+		$this->db->select('*');
+		$this->db->where('id_kontak', 1);
+		$sql = $this->db->get($this->table_contact);
+		return $sql->result();
+	}
 
-    public function check_id_employe($id_pegawai = '') {
-        $this->db->select('*');
+	public function get_present_config()
+	{
 
-        $this->db->where('id_pegawai', $id_pegawai);
+		$this->db->select('*');
+		$this->db->where('id_absen_config', 1);
+		$sql = $this->db->get($this->table_present);
+		return $sql->result();
+	}
 
-        $sql = $this->db->get($this->table_vemploye);
-        return $sql->result();
-    }
+	public function check_id_employe($id_pegawai = '')
+	{
+		$this->db->select('*');
 
-    public function get_kepsek($level = '') {
-        $this->db->select('p.nama_lengkap, p.nip');
-        $this->db->from('pegawai p');
-        $this->db->join('jabatan j', ' p.id_jabatan = j.id_jabatan', 'left');
-        $this->db->where('p.level_tingkat', $level);
-        $this->db->where('nama_jabatan', 'KEPALA SEKOLAH');
+		$this->db->where('id_pegawai', $id_pegawai);
 
-        $sql = $this->db->get($this->table_vemploye);
-        return $sql->result();
-    }
+		$sql = $this->db->get($this->table_vemploye);
+		return $sql->result();
+	}
 
-    public function get_questionnaire_by_id($id = '') {
-        $this->db->select("q.*, ta.tahun_awal, ta.tahun_akhir, ta.semester, DATE_FORMAT(q.inserted_at, '%d/%m/%Y') AS tgl_buat");
-        $this->db->from('kuisioner q');
+	public function get_kepsek($level = '')
+	{
+		$this->db->select('p.nama_lengkap, p.nip');
+		$this->db->from('pegawai p');
+		$this->db->join('jabatan j', ' p.id_jabatan = j.id_jabatan', 'left');
+		$this->db->where('p.level_tingkat', $level);
+		$this->db->where('nama_jabatan', 'KEPALA SEKOLAH');
 
-        $this->db->join('tahun_ajaran ta', 'q.th_ajaran = ta.id_tahun_ajaran', 'left');
-        $this->db->where('q.id_kuisioner', $id);
+		$sql = $this->db->get($this->table_vemploye);
+		return $sql->result();
+	}
 
-        $sql = $this->db->get();
-        return $sql->result();
-    }
+	public function get_questionnaire_by_id($id = '')
+	{
+		$this->db->select("q.*, ta.tahun_awal, ta.tahun_akhir, ta.semester, DATE_FORMAT(q.inserted_at, '%d/%m/%Y') AS tgl_buat");
+		$this->db->from('kuisioner q');
 
-    public function get_all_answer_by_id($id_kuisioner = '', $id_pegawai = '') {
-        $this->db->select('p.tipe_pertanyaan,
+		$this->db->join('tahun_ajaran ta', 'q.th_ajaran = ta.id_tahun_ajaran', 'left');
+		$this->db->where('q.id_kuisioner', $id);
+
+		$sql = $this->db->get();
+		return $sql->result();
+	}
+
+	public function get_all_answer_by_id($id_kuisioner = '', $id_pegawai = '')
+	{
+		$this->db->select('p.tipe_pertanyaan,
                             p.isi_pertanyaan,
                             COALESCE(jp.isi_jawaban, 0) AS jawaban_personal,
                             COALESCE(ja.isi_jawaban, 0) AS jawaban_atasan,
                             COALESCE(js.isi_jawaban, 0) AS jawaban_sejawat');
 
-        $this->db->from('pertanyaan p');
-        $this->db->join('jawaban_personal jp', ' p.id_pertanyaan = jp.id_pertanyaan', 'left');
-        $this->db->join('jawaban_atasan ja', ' p.id_pertanyaan = ja.id_pertanyaan', 'left');
-        $this->db->join('jawaban_sejawat js', ' p.id_pertanyaan = js.id_pertanyaan', 'left');
+		$this->db->from('pertanyaan p');
+		$this->db->join('jawaban_personal jp', ' p.id_pertanyaan = jp.id_pertanyaan', 'left');
+		$this->db->join('jawaban_atasan ja', ' p.id_pertanyaan = ja.id_pertanyaan', 'left');
+		$this->db->join('jawaban_sejawat js', ' p.id_pertanyaan = js.id_pertanyaan', 'left');
 
-        $this->db->where('p.id_kuisioner', $id_kuisioner);
-        $this->db->where('jp.id_pegawai', $id_pegawai);
-        $this->db->where('ja.id_pegawai', $id_pegawai);
-        $this->db->where('js.id_pegawai', $id_pegawai);
-        $this->db->order_by('p.inserted_at', 'ASC');
+		$this->db->where('p.id_kuisioner', $id_kuisioner);
+		$this->db->where('jp.id_pegawai', $id_pegawai);
+		$this->db->where('ja.id_pegawai', $id_pegawai);
+		$this->db->where('js.id_pegawai', $id_pegawai);
+		$this->db->order_by('p.inserted_at', 'ASC');
 
-        $sql = $this->db->get();
-        return $sql->result();
-    }
+		$sql = $this->db->get();
+		return $sql->result();
+	}
 
-    public function get_all_answer_sum_by_id($id_kuisioner = '', $id_pegawai = '') {
-        $this->db->select('p.tipe_pertanyaan,                           
+	public function get_all_answer_sum_by_id($id_kuisioner = '', $id_pegawai = '')
+	{
+		$this->db->select('p.tipe_pertanyaan,                           
                             SUM(COALESCE(jp.isi_jawaban, 0)) AS jawaban_personal,
                             SUM(COALESCE(ja.isi_jawaban, 0)) AS jawaban_atasan,
                             SUM(COALESCE(js.isi_jawaban, 0)) AS jawaban_sejawat');
 
-        $this->db->from('pertanyaan p');
-        $this->db->join('jawaban_personal jp', ' p.id_pertanyaan = jp.id_pertanyaan', 'left');
-        $this->db->join('jawaban_atasan ja', ' p.id_pertanyaan = ja.id_pertanyaan', 'left');
-        $this->db->join('jawaban_sejawat js', ' p.id_pertanyaan = js.id_pertanyaan', 'left');
+		$this->db->from('pertanyaan p');
+		$this->db->join('jawaban_personal jp', ' p.id_pertanyaan = jp.id_pertanyaan', 'left');
+		$this->db->join('jawaban_atasan ja', ' p.id_pertanyaan = ja.id_pertanyaan', 'left');
+		$this->db->join('jawaban_sejawat js', ' p.id_pertanyaan = js.id_pertanyaan', 'left');
 
-        $this->db->where('p.id_kuisioner', $id_kuisioner);
-        $this->db->where('jp.id_pegawai', $id_pegawai);
-        $this->db->where('ja.id_pegawai', $id_pegawai);
-        $this->db->where('js.id_pegawai', $id_pegawai);
-        $this->db->group_by('p.tipe_pertanyaan');
-        $this->db->order_by('p.inserted_at', 'ASC');
+		$this->db->where('p.id_kuisioner', $id_kuisioner);
+		$this->db->where('jp.id_pegawai', $id_pegawai);
+		$this->db->where('ja.id_pegawai', $id_pegawai);
+		$this->db->where('js.id_pegawai', $id_pegawai);
+		$this->db->group_by('p.tipe_pertanyaan');
+		$this->db->order_by('p.inserted_at', 'ASC');
 
-        $sql = $this->db->get();
-        return $sql->result();
-    }
+		$sql = $this->db->get();
+		return $sql->result();
+	}
 
-    public function get_employe_by_id($id = '') {
-        $this->db->select("p.*,
+	public function get_employe_by_id($id = '')
+	{
+		$this->db->select("p.*,
                                 wpasl.nama AS nama_provinsi,                                    
                                 wkbasl.nama AS nama_kabupaten_kota,
                                 wkbasl.administratif AS nama_kabupaten_kota_adm,
@@ -112,30 +131,32 @@ class ExportModel extends CI_Model {
                                 j.hasil_nama_jabatan,
                                 ta.nama_tahun_ajaran
                          ");
-        $this->db->from('view_pegawai p');
-        $this->db->join('wilayah_desa wdasl', 'p.kelurahan_desa= wdasl.id AND p.provinsi = wdasl.id_dati1 AND p.kabupaten_kota = wdasl.id_dati2 AND p.kecamatan = wdasl.id_dati3', 'left');
-        $this->db->join('wilayah_kecamatan wkasl', 'p.kecamatan = wkasl.id AND p.provinsi = wkasl.id_dati1 AND p.kabupaten_kota = wkasl.id_dati2', 'left');
-        $this->db->join('wilayah_kabupaten wkbasl', 'p.kabupaten_kota = wkbasl.id AND p.provinsi = wkbasl.id_dati1', 'left');
-        $this->db->join('wilayah_provinsi wpasl', 'p.provinsi = wpasl.id', 'left');
-        $this->db->join('jabatan j', 'p.id_jabatan = j.id_jabatan', 'left');
-        $this->db->join('tahun_ajaran ta', 'p.th_ajaran = ta.id_tahun_ajaran', 'left');
-        $this->db->where('p.id_pegawai', $id);
+		$this->db->from('view_pegawai p');
+		$this->db->join('wilayah_desa wdasl', 'p.kelurahan_desa= wdasl.id AND p.provinsi = wdasl.id_dati1 AND p.kabupaten_kota = wdasl.id_dati2 AND p.kecamatan = wdasl.id_dati3', 'left');
+		$this->db->join('wilayah_kecamatan wkasl', 'p.kecamatan = wkasl.id AND p.provinsi = wkasl.id_dati1 AND p.kabupaten_kota = wkasl.id_dati2', 'left');
+		$this->db->join('wilayah_kabupaten wkbasl', 'p.kabupaten_kota = wkbasl.id AND p.provinsi = wkbasl.id_dati1', 'left');
+		$this->db->join('wilayah_provinsi wpasl', 'p.provinsi = wpasl.id', 'left');
+		$this->db->join('jabatan j', 'p.id_jabatan = j.id_jabatan', 'left');
+		$this->db->join('tahun_ajaran ta', 'p.th_ajaran = ta.id_tahun_ajaran', 'left');
+		$this->db->where('p.id_pegawai', $id);
 
-        $sql = $this->db->get();
-        return $sql->result();
-    }
+		$sql = $this->db->get();
+		return $sql->result();
+	}
 
-    public function get_eval_by_id_employe($id_kuisioner = '', $id_pegawai = '') {
-        $this->db->select('*');
-        $this->db->where('id_kuisioner', $id_kuisioner);
-        $this->db->where('id_pegawai', $id_pegawai);
-        $sql = $this->db->get($this->table_evaluation);
-        return $sql->result();
-    }
+	public function get_eval_by_id_employe($id_kuisioner = '', $id_pegawai = '')
+	{
+		$this->db->select('*');
+		$this->db->where('id_kuisioner', $id_kuisioner);
+		$this->db->where('id_pegawai', $id_pegawai);
+		$sql = $this->db->get($this->table_evaluation);
+		return $sql->result();
+	}
 
-    public function get_data_export_presence_day($id = '') {
+	public function get_data_export_presence_day($id = '')
+	{
 
-        $this->db->select("a.*,
+		$this->db->select("a.*,
                             p.nama_lengkap,
                             p.level_tingkat,
                             p.foto_pegawai_thumb,
@@ -146,17 +167,18 @@ class ExportModel extends CI_Model {
                             ta.tahun_awal,
                             ta.tahun_akhir");
 
-        $this->db->from('absensi_pegawai a');
-        $this->db->join('pegawai p', 'a.id_pegawai = p.id_pegawai', 'left');
-        $this->db->join('tahun_ajaran ta', 'a.th_ajaran = ta.id_tahun_ajaran', 'left');
-        $this->db->where("a.id_absensi_pegawai IN ($id)");
+		$this->db->from('absensi_pegawai a');
+		$this->db->join('pegawai p', 'a.id_pegawai = p.id_pegawai', 'left');
+		$this->db->join('tahun_ajaran ta', 'a.th_ajaran = ta.id_tahun_ajaran', 'left');
+		$this->db->where("a.id_absensi_pegawai IN ($id)");
 
-        $sql = $this->db->get();
-        return $sql->result_array();
-    }
+		$sql = $this->db->get();
+		return $sql->result_array();
+	}
 
-    public function get_data_export_presence_month($id_pegawai = '') {
-        $sql = $this->db->query("SELECT
+	public function get_data_export_presence_month($id_pegawai = '')
+	{
+		$sql = $this->db->query("SELECT
                                         p.nama_lengkap,
                                         p.nip,
                                         p.foto_pegawai_thumb,
@@ -307,10 +329,8 @@ class ExportModel extends CI_Model {
                                     WHERE
                                         p.id_pegawai IN ($id_pegawai)");
 
-        return $sql->result_array();
-    }
+		return $sql->result_array();
+	}
 
-//
+	//
 }
-
-?>
