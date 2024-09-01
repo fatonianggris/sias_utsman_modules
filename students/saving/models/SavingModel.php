@@ -80,9 +80,9 @@ class SavingModel extends CI_Model
 								'%d/%m/%Y %H:%i:%s'
 							) AS waktu_transaksi,
 							CONCAT(
-								panel_utsman.ta.tahun_awal,
+								ta.tahun_awal,
 								'/',
-								panel_utsman.ta.tahun_akhir
+								ta.tahun_akhir
 							) AS tahun_ajaran,
 							t.tanggal_transaksi");
         $this->db->from('transaksi_tabungan_umum t');
@@ -110,9 +110,9 @@ class SavingModel extends CI_Model
 								'%d/%m/%Y %H:%i:%s'
 							) AS waktu_transaksi,
 							CONCAT(
-								panel_utsman.ta.tahun_awal,
+								ta.tahun_awal,
 								'/',
-								panel_utsman.ta.tahun_akhir
+								ta.tahun_akhir
 							) AS tahun_ajaran,
 							t.tanggal_transaksi");
         $this->db->from('transaksi_tabungan_qurban t');
@@ -140,9 +140,9 @@ class SavingModel extends CI_Model
 								'%d/%m/%Y %H:%i:%s'
 							) AS waktu_transaksi,
 							CONCAT(
-								panel_utsman.ta.tahun_awal,
+								ta.tahun_awal,
 								'/',
-								panel_utsman.ta.tahun_akhir
+								ta.tahun_akhir
 							) AS tahun_ajaran,
 							t.tanggal_transaksi");
         $this->db->from('transaksi_tabungan_wisata t');
