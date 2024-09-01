@@ -49,12 +49,12 @@ class FinanceModel extends CI_Model
         return $sql->result();
     }
 
-    public function get_loan_dpb_by_id_student($id_student = '')
+    public function get_loan_dpb_by_number_student($number = '')
     {
 
         $this->db->select('DATE_FORMAT(tanggal_invoice, "%m") as bulan, DATE_FORMAT(tanggal_invoice, "%Y") as tahun');
 
-        $this->db->where('id_siswa', $id_student);
+        $this->db->where('nomor_siswa', $number);
         $this->db->where('status_pembayaran', 'MENUNGGU');
         $this->db->order_by('inserted_at', 'DESC');
 
@@ -71,12 +71,12 @@ class FinanceModel extends CI_Model
         return $sql->result();
     }
 
-    public function get_payment_loan_dpb_by_id_student($id = '')
+    public function get_payment_loan_dpb_by_number_student($number = '')
     {
 
         $this->db->select('SUM(nominal_tagihan) AS tunggakan');
 
-        $this->db->where('id_siswa', $id);
+        $this->db->where('nomor_siswa', $number);
         $this->db->where('status_pembayaran', 'MENUNGGU');
         $this->db->order_by('inserted_at', 'DESC');
 
@@ -84,7 +84,7 @@ class FinanceModel extends CI_Model
         return $sql->result();
     }
 
-    public function get_payment_loan_du_by_id_student($id = '')
+    public function get_payment_loan_du_by_number_student($number = '')
     {
 
         $sql = $this->db->query("SELECT
@@ -94,7 +94,7 @@ class FinanceModel extends CI_Model
                                     FROM
                                         tagihan_pembayaran_du
                                     WHERE
-                                        id_siswa = $id AND status_pembayaran = 'MENUNGGU'
+                                        nomor_siswa = $number AND status_pembayaran = 'MENUNGGU'
                                 ) AS total_tunggak,
                                 (
                                     SELECT
@@ -102,7 +102,7 @@ class FinanceModel extends CI_Model
                                     FROM
                                         tagihan_pembayaran_du
                                     WHERE
-                                        id_siswa = $id AND status_pembayaran = 'SUKSES'
+                                        nomor_siswa = $number AND status_pembayaran = 'SUKSES'
                                 ) AS total_lunas");
         return $sql->result();
     }
@@ -112,7 +112,7 @@ class FinanceModel extends CI_Model
         $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, s.level_tingkat, k.nama_kelas, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
         $this->db->from('tagihan_pembayaran_dpb r');
 
-        $this->db->join("siswa s", "r.id_siswa = s.id_siswa AND s.id_siswa = $id");
+        $this->db->join("siswa s", "r.nomor_siswa = s.nomor_pembayaran_dpb AND s.id_siswa = $id");
         $this->db->join('tahun_ajaran ta', 'r.th_ajaran = ta.id_tahun_ajaran', 'left');
         $this->db->join('kelas k', 's.id_kelas = k.id_kelas', 'left');
         $this->db->join('tingkat t', 's.id_tingkat = t.id_tingkat', 'left');
@@ -128,7 +128,7 @@ class FinanceModel extends CI_Model
         $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, s.level_tingkat, k.nama_kelas, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
         $this->db->from('tagihan_pembayaran_du r');
 
-        $this->db->join("siswa s", "r.id_siswa = s.id_siswa AND s.id_siswa = $id");
+        $this->db->join("siswa s", "r.nomor_siswa = s.nomor_pembayaran_du AND s.id_siswa = $id");
         $this->db->join('tahun_ajaran ta', 'r.th_ajaran = ta.id_tahun_ajaran', 'left');
         $this->db->join('kelas k', 's.id_kelas = k.id_kelas', 'left');
         $this->db->join('tingkat t', 's.id_tingkat = t.id_tingkat', 'left');
@@ -144,7 +144,7 @@ class FinanceModel extends CI_Model
         $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, s.level_tingkat, k.nama_kelas, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
         $this->db->from('tagihan_pembayaran_du r');
 
-        $this->db->join("siswa s", "r.id_siswa = s.id_siswa");
+        $this->db->join("siswa s", "r.nomor_siswa = s.nomor_pembayaran_du");
         $this->db->join('tahun_ajaran ta', 'r.th_ajaran = ta.id_tahun_ajaran', 'left');
         $this->db->join('kelas k', 's.id_kelas = k.id_kelas', 'left');
         $this->db->join('tingkat t', 's.id_tingkat = t.id_tingkat', 'left');
@@ -161,7 +161,7 @@ class FinanceModel extends CI_Model
         $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, s.level_tingkat, k.nama_kelas, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
         $this->db->from('tagihan_pembayaran_dpb r');
 
-        $this->db->join("siswa s", "r.id_siswa = s.id_siswa");
+        $this->db->join("siswa s", "r.nomor_siswa = s.nomor_pembayaran_dpb");
         $this->db->join('tahun_ajaran ta', 'r.th_ajaran = ta.id_tahun_ajaran', 'left');
         $this->db->join('kelas k', 's.id_kelas = k.id_kelas', 'left');
         $this->db->join('tingkat t', 's.id_tingkat = t.id_tingkat', 'left');

@@ -243,8 +243,6 @@ class Api extends MX_Controller {
         if ($response) {
             echo '1';
         } else {
-            var_dump($ch);
-            exit;
             echo '0';
         }
     }

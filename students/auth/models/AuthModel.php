@@ -24,6 +24,8 @@ class AuthModel extends CI_Model
 
         $this->db->select("s.id_siswa,
                             s.nisn,
+							s.nomor_pembayaran_dpb,
+							s.nomor_pembayaran_du,
                             s.nis,
                             s.nik,
                             s.id_tingkat,

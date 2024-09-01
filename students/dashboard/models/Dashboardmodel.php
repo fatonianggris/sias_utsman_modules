@@ -8,6 +8,7 @@ class DashboardModel extends CI_Model {
     private $table_students_config = 'absen_config';
     private $table_schoolyear = 'tahun_ajaran';
     private $table_payment_dpb = 'tagihan_pembayaran_dpb';
+	private $table_payment_du = 'tagihan_pembayaran_du';
     private $table_student = 'siswa';
     private $table_third_party = 'third_party';
 
@@ -67,12 +68,21 @@ class DashboardModel extends CI_Model {
         return $sql->result();
     }
 
-    public function get_status_payment($id_siswa = '', $date = '') {
+    public function get_status_payment_dpb($number = '', $date = '') {
 
         $this->db->select('*');
-        $this->db->where('id_siswa', $id_siswa);
+        $this->db->where('nomor_siswa', $number);
         $this->db->where("DATE_FORMAT(inserted_at,'%Y-%m')", $date);
         $sql = $this->db->get($this->table_payment_dpb);
+        return $sql->result();
+    }
+
+	public function get_status_payment_du($number = '', $date = '') {
+
+        $this->db->select('*');
+        $this->db->where('nomor_siswa', $number);
+        $this->db->where("DATE_FORMAT(inserted_at,'%Y-%m')", $date);
+        $sql = $this->db->get($this->table_payment_du);
         return $sql->result();
     }
 

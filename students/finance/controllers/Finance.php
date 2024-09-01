@@ -22,9 +22,9 @@ class Finance extends MX_Controller {
         $data['class'] = $this->FinanceModel->get_class();
         $data['grade'] = $this->FinanceModel->get_grade();
         $data['schoolyear'] = $this->FinanceModel->get_schoolyear_all();
-        $data['loan'] = $this->FinanceModel->get_payment_loan_dpb_by_id_student($this->user_students[0]->id_siswa);
+        $data['loan'] = $this->FinanceModel->get_payment_loan_dpb_by_number_student($this->user_students[0]->nomor_pembayaran_dpb);
         $data['payment'] = $this->FinanceModel->get_payment_dpb_by_id_student($this->user_students[0]->id_siswa);
-        $data['check_payment'] = $this->FinanceModel->get_loan_dpb_by_id_student($this->user_students[0]->id_siswa);
+        $data['check_payment'] = $this->FinanceModel->get_loan_dpb_by_number_student($this->user_students[0]->nomor_pembayaran_dpb);
 
         $this->load->view('list_students_payment_dpb', $data);
         //$this->template->load('template_admin/template_admin', 'under_dev', $data);
@@ -38,7 +38,7 @@ class Finance extends MX_Controller {
         $data['class'] = $this->FinanceModel->get_class();
         $data['grade'] = $this->FinanceModel->get_grade();
         $data['schoolyear'] = $this->FinanceModel->get_schoolyear_all();
-        $data['loan'] = $this->FinanceModel->get_payment_loan_du_by_id_student($this->user_students[0]->id_siswa);
+        $data['loan'] = $this->FinanceModel->get_payment_loan_du_by_number_student($this->user_students[0]->nomor_pembayaran_du);
         $data['payment'] = $this->FinanceModel->get_payment_du_by_id_student($this->user_students[0]->id_siswa);
 
         $this->load->view('list_students_payment_du', $data);
