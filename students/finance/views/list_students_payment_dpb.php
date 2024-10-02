@@ -207,17 +207,6 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-
-                                                            <div class="col-md-3 my-2 col-6">
-                                                                <div class="d-flex align-items-center">
-                                                                    <select class="form-control datatable-input" data-col-index="11">
-                                                                        <option value="">Pilih Semester</option>
-                                                                        <option value="GANJIL">Ganjil</option>
-                                                                        <option value="GENAP">Genap</option>
-                                                                        <option value="">Semua</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
                                                             <div class="col-md-3 my-2 col-6">
                                                                 <div class="d-flex align-items-center">
                                                                     <select class="form-control datatable-input" data-col-index="3">
@@ -237,10 +226,10 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3 my-2 col-12">
+                                                            <div class="col-md-3 my-2 col-6">
                                                                 <div class="d-flex align-items-center">
                                                                     <select class="form-control datatable-input" data-col-index="10">
-                                                                        <option value="">Pilih Tahun Ajaran</option>
+                                                                        <option value="">Pilih TA</option>
                                                                         <?php
                                                                         if (!empty($schoolyear)) {
                                                                             foreach ($schoolyear as $key => $value_sch) {
@@ -288,20 +277,29 @@
                                                 <th>Status</th>
                                                 <th>Bulan</th>
                                                 <th>NIS</th>
-                                                <th>Jenjang</th>
                                                 <th>Tingkat</th>
-                                                <th>Tipe Pembayaran</th>
+                                                <th>Kelas</th>
+                                                <th>Tipe Tagihan</th>
                                                 <th>Nominal</th>
                                                 <th>Waktu Transaksi</th>
                                                 <th>Tahun Ajaran</th>
-                                                <th>Semester</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             if (!empty($payment)) {
                                                 foreach ($payment as $key => $value) {
+													if ($value->level_tingkat == '6') {
+														$nama_tingkat = 'DC';
+													} else if ($value->level_tingkat == '1') {
+														$nama_tingkat = 'KB';
+													} else if ($value->level_tingkat == '2') {
+														$nama_tingkat = 'TK';
+													} else if ($value->level_tingkat == '3') {
+														$nama_tingkat = 'SD';
+													} else if ($value->level_tingkat == '4') {
+														$nama_tingkat = 'SMP';
+													}
                                             ?>
                                                     <tr>
                                                         <td></td>
@@ -318,11 +316,11 @@
                                                             <?php echo $value->nis; ?>
                                                         </td>
                                                         <td class="font-weight-bolder">
-                                                            <?php echo substr($value->informasi, 0, 2); ?>
+                                                            <?php echo $nama_tingkat; ?>
                                                         </td>
                                                         <td class="font-weight-bolder">
                                                             <span class="label label-lg font-weight-bold label-light-default label-inline">
-                                                                <?php echo $value->informasi; ?>
+                                                                <?php echo $value->nama_kelas; ?>
                                                             </span>
                                                         </td>
                                                         <td class="font-weight-bolder">
@@ -337,10 +335,6 @@
                                                         <td class="font-weight-bolder">
                                                             <?php echo $value->tahun_awal; ?>/<?php echo $value->tahun_akhir; ?>
                                                         </td>
-                                                        <td class="font-weight-bolder">
-                                                            <?php echo strtoupper(strtolower($value->semester)); ?>
-                                                        </td>
-
                                                     </tr>
                                             <?php
                                                 }  //ngatur nomor urut

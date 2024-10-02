@@ -109,12 +109,11 @@ class FinanceModel extends CI_Model
 
     public function get_payment_dpb_by_id_student($id = '')
     {
-        $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, s.level_tingkat, k.nama_kelas, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
+        $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
         $this->db->from('tagihan_pembayaran_dpb r');
 
         $this->db->join("siswa s", "r.nomor_siswa = s.nomor_pembayaran_dpb AND s.id_siswa = $id");
         $this->db->join('tahun_ajaran ta', 'r.th_ajaran = ta.id_tahun_ajaran', 'left');
-        $this->db->join('kelas k', 's.id_kelas = k.id_kelas', 'left');
         $this->db->join('tingkat t', 's.id_tingkat = t.id_tingkat', 'left');
 
         $this->db->order_by('r.id_tagihan_pembayaran_dpb', 'DESC');
@@ -125,12 +124,11 @@ class FinanceModel extends CI_Model
 
     public function get_payment_du_by_id_student($id = '')
     {
-        $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, s.level_tingkat, k.nama_kelas, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
+        $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
         $this->db->from('tagihan_pembayaran_du r');
 
         $this->db->join("siswa s", "r.nomor_siswa = s.nomor_pembayaran_du AND s.id_siswa = $id");
         $this->db->join('tahun_ajaran ta', 'r.th_ajaran = ta.id_tahun_ajaran', 'left');
-        $this->db->join('kelas k', 's.id_kelas = k.id_kelas', 'left');
         $this->db->join('tingkat t', 's.id_tingkat = t.id_tingkat', 'left');
 
         $this->db->order_by('r.id_tagihan_pembayaran_du', 'DESC');
@@ -141,12 +139,11 @@ class FinanceModel extends CI_Model
 
     public function get_payment_du_by_id_payment($id = '')
     {
-        $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, s.level_tingkat, k.nama_kelas, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
+        $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
         $this->db->from('tagihan_pembayaran_du r');
 
         $this->db->join("siswa s", "r.nomor_siswa = s.nomor_pembayaran_du");
         $this->db->join('tahun_ajaran ta', 'r.th_ajaran = ta.id_tahun_ajaran', 'left');
-        $this->db->join('kelas k', 's.id_kelas = k.id_kelas', 'left');
         $this->db->join('tingkat t', 's.id_tingkat = t.id_tingkat', 'left');
 
         $this->db->where('r.id_tagihan_pembayaran_du', $id);
@@ -158,12 +155,11 @@ class FinanceModel extends CI_Model
 
     public function get_payment_dpb_by_id_payment($id = '')
     {
-        $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, s.level_tingkat, k.nama_kelas, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
+        $this->db->select("r.*, MONTH(r.inserted_at) AS bulan_bayar, s.nisn, s.nis, s.email, s.status_siswa, s.foto_siswa_thumb, s.jenis_kelamin, s.nama_lengkap AS nama_siswa, t.nama_tingkat, ta.tahun_awal, ta.tahun_akhir, ta.semester");
         $this->db->from('tagihan_pembayaran_dpb r');
 
         $this->db->join("siswa s", "r.nomor_siswa = s.nomor_pembayaran_dpb");
         $this->db->join('tahun_ajaran ta', 'r.th_ajaran = ta.id_tahun_ajaran', 'left');
-        $this->db->join('kelas k', 's.id_kelas = k.id_kelas', 'left');
         $this->db->join('tingkat t', 's.id_tingkat = t.id_tingkat', 'left');
 
         $this->db->where('r.id_tagihan_pembayaran_dpb', $id);

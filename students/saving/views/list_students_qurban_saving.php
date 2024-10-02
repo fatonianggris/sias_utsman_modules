@@ -333,9 +333,6 @@
     <!--end::Login-->
     </div>
     <div class="whatsapp_chat_support wcs_fixed_right" id="example_1">
-        <div class="wcs_button_label">
-
-        </div>
         <div class="wcs_button wcs_button_circle">
             <span class="fa fa-phone"></span>
         </div>

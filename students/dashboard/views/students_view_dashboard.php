@@ -435,7 +435,7 @@
                                             </svg>
                                             <!--end::Svg Icon-->
                                         </span>
-                                        <div class="font-weight-bolder font-size-sm mt-3 text-white">Riwayat Tagihan
+                                        <div class="font-weight-bolder font-size-sm mt-3 text-white">Riwayat Tagihan DU/DPB
                                             Siswa</div>
                                         <a href="#" data-toggle="modal" data-target="#modal_list_letter"
                                             class="btn btn-light-warning btn-shadow-hover font-weight-bold mt-3"><i
@@ -513,7 +513,7 @@
                         </div>
                         <div class="row">
                             <?php if ($page[0]->status_maintenance_report == 1) { ?>
-                            <div class="col-xl-6 col-6">
+                            <div class="col-xl-6 col-6" style="display: none;">
                                 <!--begin::Tiles Widget 12-->
                                 <div class="card card-custom gutter-b text-center bg-dark-o-90">
                                     <div class="card-body">
@@ -545,7 +545,7 @@
                                 <!--end::Tiles Widget 12-->
                             </div>
                             <?php } else { ?>
-                            <div class="col-xl-6 col-6">
+                            <div class="col-xl-6 col-6" >
                                 <!--begin::Tiles Widget 12-->
                                 <div class="card card-custom gutter-b text-center bg-primary">
                                     <div class="card-body">
@@ -577,7 +577,7 @@
                             </div>
                             <?php } ?>
                             <?php if ($page[0]->status_maintenance_presence == 1) { ?>
-                            <div class="col-xl-6 col-6 ">
+                            <div class="col-xl-6 col-6 " style="display: none;">
                                 <!--begin::Tiles Widget 12-->
                                 <div class="card card-custom gutter-b text-center bg-dark-o-90">
                                     <div class="card-body ">
