@@ -54,7 +54,6 @@ class AuthModel extends CI_Model {
                         p.nama_wajib_pajak,
                         p.tanggal_masuk,
                         p.tanggal_keluar,
-                        p.update_at,
                         p.inserted_at,
                         p.th_ajaran,
                         p.foto_pegawai,
