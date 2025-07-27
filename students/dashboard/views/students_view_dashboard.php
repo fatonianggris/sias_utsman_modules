@@ -39,6 +39,24 @@
             opacity: 0;
         }
     }
+
+    .wrapper-slider-custom {
+        width: 50%;
+        margin: auto;
+        overflow: hidden;
+    }
+
+
+    .slider-container-custom {
+        display: flex;
+        /* Penting agar tidak numpuk */
+        transition: transform 0.5s ease-in-out;
+        flex-wrap: nowrap;
+    }
+
+    .box-information {
+        height: 157px;
+    }
     </style>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>
@@ -123,124 +141,311 @@
                     </div>
                     <?php echo $this->session->flashdata('flash_message'); ?>
                     <!--end::Stats Widget 6-->
+
                     <div class="row">
-                        <?php if ($status_payment) { ?>
-                        <?php if ($status_payment[0]->status_pembayaran == "MENUNGGU") { ?>
-                        <div class="col-xl-6 col-6 ">
-                            <!--begin::Tiles Widget 12-->
-                            <div class="card card-custom text-center bg-danger-o-50">
-                                <div class="card-body ">
-                                    <div class="text-dark-75 font-weight-bolder font-size-sm font-size-h6 mb-1">Status
-                                        Bayar DPB</div>
-                                    <span class="svg-icon svg-icon-3x svg-icon-danger ">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <rect fill="#000000" opacity="0.3" x="2" y="2" width="20" height="20"
-                                                    rx="10" />
-                                                <path
-                                                    d="M6.16794971,14.5547002 C5.86159725,14.0951715 5.98577112,13.4743022 6.4452998,13.1679497 C6.90482849,12.8615972 7.52569784,12.9857711 7.83205029,13.4452998 C8.9890854,15.1808525 10.3543313,16 12,16 C13.6456687,16 15.0109146,15.1808525 16.1679497,13.4452998 C16.4743022,12.9857711 17.0951715,12.8615972 17.5547002,13.1679497 C18.0142289,13.4743022 18.1384028,14.0951715 17.8320503,14.5547002 C16.3224187,16.8191475 14.3543313,18 12,18 C9.64566871,18 7.67758127,16.8191475 6.16794971,14.5547002 Z"
-                                                    fill="#000000"
-                                                    transform="translate(12.000000, 15.499947) scale(1, -1) translate(-12.000000, -15.499947) " />
-                                            </g>
-                                        </svg>
-                                        <!--end::Svg Icon-->
-                                    </span>
-                                    <?php
-                                            date_default_timezone_set('Asia/Jakarta');
-                                            $date = date("Y-m-d");
-                                            $nameOfMonth = date('F', strtotime($date));
-                                            ?>
-                                    <div class="font-weight-boldest font-size-sm text-dark-75 font-size-h5 mt-1">
-                                        <?php echo strtoupper(bulanindoSQLtext($nameOfMonth)); ?></div>
-                                    <div class="font-weight-bolder font-size-sm text-dark-75"><?php echo date("Y"); ?>
-                                    </div>
-                                    <div class="font-weight-boldest text-danger font-size-h2 blink-hard">TUNGGAK</div>
-                                </div>
-                            </div>
-                            <!--end::Tiles Widget 12-->
-                        </div>
-                        <?php } else { ?>
-                        <div class="col-xl-6 col-6 ">
-                            <!--begin::Tiles Widget 12-->
-                            <div class="card card-custom text-center bg-success-o-50">
-                                <div class="card-body ">
-                                    <div class="text-dark-75 font-weight-bolder font-size-sm font-size-h6 mb-1">Status
-                                        Bayar DPB</div>
-                                    <span class="svg-icon svg-icon-3x svg-icon-success ">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <rect fill="#000000" opacity="0.3" x="2" y="2" width="20" height="20"
-                                                    rx="10" />
-                                                <path
-                                                    d="M6.16794971,14.5547002 C5.86159725,14.0951715 5.98577112,13.4743022 6.4452998,13.1679497 C6.90482849,12.8615972 7.52569784,12.9857711 7.83205029,13.4452998 C8.9890854,15.1808525 10.3543313,16 12,16 C13.6456687,16 15.0109146,15.1808525 16.1679497,13.4452998 C16.4743022,12.9857711 17.0951715,12.8615972 17.5547002,13.1679497 C18.0142289,13.4743022 18.1384028,14.0951715 17.8320503,14.5547002 C16.3224187,16.8191475 14.3543313,18 12,18 C9.64566871,18 7.67758127,16.8191475 6.16794971,14.5547002 Z"
-                                                    fill="#000000" />
-                                            </g>
-                                        </svg>
-                                        <!--end::Svg Icon-->
-                                    </span>
-                                    <?php
-                                            date_default_timezone_set('Asia/Jakarta');
-                                            $date = date("Y-m-d");
-                                            $nameOfMonth = date('F', strtotime($date));
-                                            ?>
-                                    <div class="font-weight-boldest font-size-sm text-dark-75 font-size-h4">
-                                        <?php echo strtoupper(bulanindoSQLtext($nameOfMonth)); ?></div>
-                                    <div class="font-weight-bolder font-size-sm text-dark-75"><?php echo date("Y"); ?>
-                                    </div>
-                                    <div class="font-weight-boldest text-success font-size-h2 blink-hard">LUNAS</div>
-                                </div>
-                            </div>
-                            <!--end::Tiles Widget 12-->
-                        </div>
-                        <?php } ?>
-                        <?php } else { ?>
-                        <div class="col-xl-6 col-6 ">
-                            <!--begin::Tiles Widget 12-->
-                            <div class="card card-custom text-center bg-warning-o-50">
-                                <div class="card-body ">
-                                    <div class="text-dark-75 font-weight-bolder font-size-sm font-size-h6 mb-1">Status
-                                        Bayar DPB</div>
-                                    <span class="svg-icon svg-icon-3x svg-icon-warning ">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                                <rect fill="#000000" x="11" y="10" width="2" height="7" rx="1" />
-                                                <rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
-                                            </g>
-                                        </svg>
-                                        <!--end::Svg Icon-->
-                                    </span>
-                                    <?php
+                        <div class="wrapper-slider-custom">
+                            <div class="slider-container-custom" id="slider">
+                                <?php if ($status_payment_du) { ?>
+                                <?php if ($status_payment_du[0]->status_pembayaran == "MENUNGGU") { ?>
+                                <div class="col-xl-12 col-12 slider-card">
+                                    <!--begin::Tiles Widget 12-->
+                                    <div class="card card-custom text-center bg-danger-o-50 box-information">
+                                        <div class="card-body ">
+                                            <div class="text-dark-75 font-weight-bolder font-size-sm font-size-h6 mb-1">
+                                                Status
+                                                Bayar DU</div>
+                                            <span class="svg-icon svg-icon-3x svg-icon-danger ">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <rect fill="#000000" opacity="0.3" x="2" y="2" width="20"
+                                                            height="20" rx="10" />
+                                                        <path
+                                                            d="M6.16794971,14.5547002 C5.86159725,14.0951715 5.98577112,13.4743022 6.4452998,13.1679497 C6.90482849,12.8615972 7.52569784,12.9857711 7.83205029,13.4452998 C8.9890854,15.1808525 10.3543313,16 12,16 C13.6456687,16 15.0109146,15.1808525 16.1679497,13.4452998 C16.4743022,12.9857711 17.0951715,12.8615972 17.5547002,13.1679497 C18.0142289,13.4743022 18.1384028,14.0951715 17.8320503,14.5547002 C16.3224187,16.8191475 14.3543313,18 12,18 C9.64566871,18 7.67758127,16.8191475 6.16794971,14.5547002 Z"
+                                                            fill="#000000"
+                                                            transform="translate(12.000000, 15.499947) scale(1, -1) translate(-12.000000, -15.499947) " />
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                            <?php
                                         date_default_timezone_set('Asia/Jakarta');
                                         $date = date("Y-m-d");
                                         $nameOfMonth = date('F', strtotime($date));
                                         ?>
-                                    <div class="font-weight-boldest font-size-sm text-dark-75 font-size-h5">
-                                        <?php echo strtoupper(bulanindoSQLtext($nameOfMonth)); ?></div>
-                                    <div class="font-weight-bolder font-size-sm text-dark-75"><?php echo date("Y"); ?>
+                                            <div class="font-weight-bolder font-size-sm text-dark-75">
+                                                TAHUN AJARAN
+                                            </div>
+                                            <div class="font-weight-boldest font-size-sm text-dark-75 font-size-h5">
+                                                <?php echo date("Y"); ?>/<?php echo date("Y")+1; ?>
+                                            </div>
+                                            <div class="font-weight-boldest text-danger font-size-h2 blink-hard">TUNGGAK
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="font-weight-boldest text-warning font-size-h3 blink-hard mt-1">MENUNGGU
-                                    </div>
+                                    <!--end::Tiles Widget 12-->
                                 </div>
+                                <?php } else { ?>
+                                <div class="col-xl-12 col-12 slider-card">
+                                    <!--begin::Tiles Widget 12-->
+                                    <div class="card card-custom text-center bg-success-o-50 box-information">
+                                        <div class="card-body ">
+                                            <div class="text-dark-75 font-weight-bolder font-size-sm font-size-h6 mb-1">
+                                                Status
+                                                Bayar DU</div>
+                                            <span class="svg-icon svg-icon-3x svg-icon-success ">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <rect fill="#000000" opacity="0.3" x="2" y="2" width="20"
+                                                            height="20" rx="10" />
+                                                        <path
+                                                            d="M6.16794971,14.5547002 C5.86159725,14.0951715 5.98577112,13.4743022 6.4452998,13.1679497 C6.90482849,12.8615972 7.52569784,12.9857711 7.83205029,13.4452998 C8.9890854,15.1808525 10.3543313,16 12,16 C13.6456687,16 15.0109146,15.1808525 16.1679497,13.4452998 C16.4743022,12.9857711 17.0951715,12.8615972 17.5547002,13.1679497 C18.0142289,13.4743022 18.1384028,14.0951715 17.8320503,14.5547002 C16.3224187,16.8191475 14.3543313,18 12,18 C9.64566871,18 7.67758127,16.8191475 6.16794971,14.5547002 Z"
+                                                            fill="#000000" />
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                            <?php
+                                        date_default_timezone_set('Asia/Jakarta');
+                                        $date = date("Y-m-d");
+                                        $nameOfMonth = date('F', strtotime($date));
+                                        ?>
+                                            <div class="font-weight-bolder font-size-sm text-dark-75 ">
+                                                TAHUN AJARAN
+                                            </div>
+                                            <div class="font-weight-boldest font-size-sm text-dark-75 font-size-h5">
+                                                <?php echo date("Y"); ?>/<?php echo date("Y")+1; ?>
+                                            </div>
+                                            <div class="font-weight-boldest text-success font-size-h2 blink-hard">LUNAS
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Tiles Widget 12-->
+                                </div>
+                                <?php } ?>
+                                <?php } else { ?>
+                                <div class="col-xl-12 col-12 slider-card">
+                                    <!--begin::Tiles Widget 12-->
+                                    <div class="card card-custom text-center bg-warning-o-50 box-information">
+                                        <div class="card-body ">
+                                            <div class="text-dark-75 font-weight-bolder font-size-sm font-size-h6 mb-1">
+                                                Status
+                                                Bayar DU</div>
+                                            <span class="svg-icon svg-icon-3x svg-icon-warning ">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                                        <rect fill="#000000" x="11" y="10" width="2" height="7"
+                                                            rx="1" />
+                                                        <rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                            <?php
+                                        date_default_timezone_set('Asia/Jakarta');
+                                        $date = date("Y-m-d");
+                                        $nameOfMonth = date('F', strtotime($date));
+                                        ?>
+                                            <div class="font-weight-bolder font-size-sm text-dark-75">
+                                                TAHUN AJARAN
+                                            </div>
+                                            <div class="font-weight-boldest font-size-sm text-dark-75 font-size-h5">
+                                                <?php echo date("Y"); ?>/<?php echo date("Y")+1; ?>
+                                            </div>
+                                            <div class="font-weight-boldest text-warning font-size-h3 blink-hard mt-1">
+                                                MENUNGGU
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Tiles Widget 12-->
+                                </div>
+                                <?php } ?>
+                                <?php $bulan = date('m'); ?>
+                                <?php if ($bulan == '07') { ?>
+                                <div class="col-xl-12 col-12 slider-card">
+                                    <!--begin::Tiles Widget 12-->
+                                    <div class="card card-custom text-center bg-success-o-50 box-information">
+                                        <div class="card-body ">
+                                            <div class="text-dark-75 font-weight-bolder font-size-sm font-size-h6 mb-1">
+                                                Status
+                                                Bayar DPB</div>
+                                            <span class="svg-icon svg-icon-3x svg-icon-success ">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <rect fill="#000000" opacity="0.3" x="2" y="2" width="20"
+                                                            height="20" rx="10" />
+                                                        <path
+                                                            d="M6.16794971,14.5547002 C5.86159725,14.0951715 5.98577112,13.4743022 6.4452998,13.1679497 C6.90482849,12.8615972 7.52569784,12.9857711 7.83205029,13.4452998 C8.9890854,15.1808525 10.3543313,16 12,16 C13.6456687,16 15.0109146,15.1808525 16.1679497,13.4452998 C16.4743022,12.9857711 17.0951715,12.8615972 17.5547002,13.1679497 C18.0142289,13.4743022 18.1384028,14.0951715 17.8320503,14.5547002 C16.3224187,16.8191475 14.3543313,18 12,18 C9.64566871,18 7.67758127,16.8191475 6.16794971,14.5547002 Z"
+                                                            fill="#000000" />
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                            <?php
+                                            date_default_timezone_set('Asia/Jakarta');
+                                            $date = date("Y-m-d");
+                                            $nameOfMonth = date('F', strtotime($date));
+                                            ?>
+                                            <div class="font-weight-boldest font-size-sm text-dark-75 font-size-h4">
+                                                <?php echo strtoupper(bulanindoSQLtext($nameOfMonth)); ?></div>
+                                            <div class="font-weight-bolder font-size-sm text-dark-75">
+                                                <?php echo date("Y"); ?>
+                                            </div>
+                                            <div class="font-weight-boldest text-success font-size-h2 blink-hard">LUNAS
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Tiles Widget 12-->
+                                </div>
+                                <?php } else { ?>
+                                <?php if ($status_payment_dpb) { ?>
+                                <?php if ($status_payment_dpb[0]->status_pembayaran == "MENUNGGU") { ?>
+                                <div class="col-xl-12 col-12 slider-card">
+                                    <!--begin::Tiles Widget 12-->
+                                    <div class="card card-custom text-center bg-danger-o-50 box-information">
+                                        <div class="card-body ">
+                                            <div class="text-dark-75 font-weight-bolder font-size-sm font-size-h6 mb-1">
+                                                Status
+                                                Bayar DPB</div>
+                                            <span class="svg-icon svg-icon-3x svg-icon-danger ">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <rect fill="#000000" opacity="0.3" x="2" y="2" width="20"
+                                                            height="20" rx="10" />
+                                                        <path
+                                                            d="M6.16794971,14.5547002 C5.86159725,14.0951715 5.98577112,13.4743022 6.4452998,13.1679497 C6.90482849,12.8615972 7.52569784,12.9857711 7.83205029,13.4452998 C8.9890854,15.1808525 10.3543313,16 12,16 C13.6456687,16 15.0109146,15.1808525 16.1679497,13.4452998 C16.4743022,12.9857711 17.0951715,12.8615972 17.5547002,13.1679497 C18.0142289,13.4743022 18.1384028,14.0951715 17.8320503,14.5547002 C16.3224187,16.8191475 14.3543313,18 12,18 C9.64566871,18 7.67758127,16.8191475 6.16794971,14.5547002 Z"
+                                                            fill="#000000"
+                                                            transform="translate(12.000000, 15.499947) scale(1, -1) translate(-12.000000, -15.499947) " />
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                            <?php
+                                            date_default_timezone_set('Asia/Jakarta');
+                                            $date = date("Y-m-d");
+                                            $nameOfMonth = date('F', strtotime($date));
+                                            ?>
+                                            <div
+                                                class="font-weight-boldest font-size-sm text-dark-75 font-size-h5 mt-1">
+                                                <?php echo strtoupper(bulanindoSQLtext($nameOfMonth)); ?></div>
+                                            <div class="font-weight-bolder font-size-sm text-dark-75">
+                                                <?php echo date("Y"); ?>
+                                            </div>
+                                            <div class="font-weight-boldest text-danger font-size-h2 blink-hard">TUNGGAK
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Tiles Widget 12-->
+                                </div>
+                                <?php } else { ?>
+                                <div class="col-xl-12 col-12 slider-card">
+                                    <!--begin::Tiles Widget 12-->
+                                    <div class="card card-custom text-center bg-success-o-50 box-information">
+                                        <div class="card-body ">
+                                            <div class="text-dark-75 font-weight-bolder font-size-sm font-size-h6 mb-1">
+                                                Status
+                                                Bayar DPB</div>
+                                            <span class="svg-icon svg-icon-3x svg-icon-success ">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <rect fill="#000000" opacity="0.3" x="2" y="2" width="20"
+                                                            height="20" rx="10" />
+                                                        <path
+                                                            d="M6.16794971,14.5547002 C5.86159725,14.0951715 5.98577112,13.4743022 6.4452998,13.1679497 C6.90482849,12.8615972 7.52569784,12.9857711 7.83205029,13.4452998 C8.9890854,15.1808525 10.3543313,16 12,16 C13.6456687,16 15.0109146,15.1808525 16.1679497,13.4452998 C16.4743022,12.9857711 17.0951715,12.8615972 17.5547002,13.1679497 C18.0142289,13.4743022 18.1384028,14.0951715 17.8320503,14.5547002 C16.3224187,16.8191475 14.3543313,18 12,18 C9.64566871,18 7.67758127,16.8191475 6.16794971,14.5547002 Z"
+                                                            fill="#000000" />
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                            <?php
+                                            date_default_timezone_set('Asia/Jakarta');
+                                            $date = date("Y-m-d");
+                                            $nameOfMonth = date('F', strtotime($date));
+                                            ?>
+                                            <div class="font-weight-boldest font-size-sm text-dark-75 font-size-h4">
+                                                <?php echo strtoupper(bulanindoSQLtext($nameOfMonth)); ?></div>
+                                            <div class="font-weight-bolder font-size-sm text-dark-75">
+                                                <?php echo date("Y"); ?>
+                                            </div>
+                                            <div class="font-weight-boldest text-success font-size-h2 blink-hard">LUNAS
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Tiles Widget 12-->
+                                </div>
+                                <?php } ?>
+                                <?php } else { ?>
+                                <div class="col-xl-12 col-12 slider-card">
+                                    <!--begin::Tiles Widget 12-->
+                                    <div class="card card-custom text-center bg-warning-o-50 box-information">
+                                        <div class="card-body ">
+                                            <div class="text-dark-75 font-weight-bolder font-size-sm font-size-h6 mb-1">
+                                                Status
+                                                Bayar DPB</div>
+                                            <span class="svg-icon svg-icon-3x svg-icon-warning ">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                                        <rect fill="#000000" x="11" y="10" width="2" height="7"
+                                                            rx="1" />
+                                                        <rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                            <?php
+                                        date_default_timezone_set('Asia/Jakarta');
+                                        $date = date("Y-m-d");
+                                        $nameOfMonth = date('F', strtotime($date));
+                                        ?>
+                                            <div class="font-weight-boldest font-size-sm text-dark-75 font-size-h5">
+                                                <?php echo strtoupper(bulanindoSQLtext($nameOfMonth)); ?></div>
+                                            <div class="font-weight-bolder font-size-sm text-dark-75">
+                                                <?php echo date("Y"); ?>
+                                            </div>
+                                            <div class="font-weight-boldest text-warning font-size-h3 blink-hard mt-1">
+                                                MENUNGGU
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Tiles Widget 12-->
+                                </div>
+                                <?php } ?>
+                                <?php } ?>
                             </div>
-                            <!--end::Tiles Widget 12-->
                         </div>
-                        <?php } ?>
+
                         <div class="col-xl-6 col-6">
                             <!--begin::Tiles Widget 12-->
-                            <div class="card card-custom text-center bg-primary-o-90">
+                            <div class="card card-custom text-center bg-primary-o-90 box-information">
                                 <div class="card-body">
                                     <?php if ($user[0]->foto_siswa == NULL or $user[0]->foto_siswa == "") { ?>
                                     <div class="symbol symbol-70 symbol-lg-100 symbol-light-danger ">
@@ -383,7 +588,7 @@
                             <?php if ($page[0]->status_maintenance_finance == 1) { ?>
                             <div class="col-xl-6 col-6 ">
                                 <!--begin::Tiles Widget 12-->
-                                <div class="card card-custom gutter-b text-center bg-dark-o-90">
+                                <div class="card card-custom gutter-b text-center bg-dark-o-90 box-information">
                                     <div class="card-body ">
                                         <span class="svg-icon svg-icon-3x svg-icon-dark ">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
@@ -415,7 +620,7 @@
                             <?php } else { ?>
                             <div class="col-xl-6 col-6 ">
                                 <!--begin::Tiles Widget 12-->
-                                <div class="card card-custom gutter-b text-center bg-primary">
+                                <div class="card card-custom gutter-b text-center bg-primary box-information">
                                     <div class="card-body ">
                                         <span class="svg-icon svg-icon-3x svg-icon-white ">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
@@ -435,7 +640,8 @@
                                             </svg>
                                             <!--end::Svg Icon-->
                                         </span>
-                                        <div class="font-weight-bolder font-size-sm mt-3 text-white">Riwayat Tagihan DU/DPB
+                                        <div class="font-weight-bolder font-size-sm mt-3 text-white">Riwayat Tagihan
+                                            DU/DPB
                                             Siswa</div>
                                         <a href="#" data-toggle="modal" data-target="#modal_list_letter"
                                             class="btn btn-light-warning btn-shadow-hover font-weight-bold mt-3"><i
@@ -448,7 +654,7 @@
                             <?php if ($page[0]->status_maintenance_finance == 1) { ?>
                             <div class="col-xl-6 col-6 ">
                                 <!--begin::Tiles Widget 12-->
-                                <div class="card card-custom gutter-b text-center bg-dark-o-90">
+                                <div class="card card-custom gutter-b text-center bg-dark-o-90 box-information">
                                     <div class="card-body ">
                                         <span class="svg-icon svg-icon-3x svg-icon-dark ">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
@@ -481,7 +687,7 @@
                             <?php } else { ?>
                             <div class="col-xl-6 col-6 ">
                                 <!--begin::Tiles Widget 12-->
-                                <div class="card card-custom gutter-b text-center bg-primary">
+                                <div class="card card-custom gutter-b text-center bg-primary box-information">
                                     <div class="card-body ">
                                         <span class="svg-icon svg-icon-3x svg-icon-white ">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
@@ -515,7 +721,7 @@
                             <?php if ($page[0]->status_maintenance_report == 1) { ?>
                             <div class="col-xl-6 col-6" style="display: none;">
                                 <!--begin::Tiles Widget 12-->
-                                <div class="card card-custom gutter-b text-center bg-dark-o-90">
+                                <div class="card card-custom gutter-b text-center bg-dark-o-90 box-information">
                                     <div class="card-body">
                                         <span class="svg-icon svg-icon-3x svg-icon-dark">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
@@ -545,9 +751,9 @@
                                 <!--end::Tiles Widget 12-->
                             </div>
                             <?php } else { ?>
-                            <div class="col-xl-6 col-6" >
+                            <div class="col-xl-6 col-6">
                                 <!--begin::Tiles Widget 12-->
-                                <div class="card card-custom gutter-b text-center bg-primary">
+                                <div class="card card-custom gutter-b text-center bg-primary box-information">
                                     <div class="card-body">
                                         <span class="svg-icon svg-icon-3x svg-icon-white">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
@@ -579,7 +785,7 @@
                             <?php if ($page[0]->status_maintenance_presence == 1) { ?>
                             <div class="col-xl-6 col-6 " style="display: none;">
                                 <!--begin::Tiles Widget 12-->
-                                <div class="card card-custom gutter-b text-center bg-dark-o-90">
+                                <div class="card card-custom gutter-b text-center bg-dark-o-90 box-information">
                                     <div class="card-body ">
                                         <span class="svg-icon svg-icon-3x svg-icon-dark ">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
@@ -610,7 +816,7 @@
                             <?php } else { ?>
                             <div class="col-xl-6 col-6 ">
                                 <!--begin::Tiles Widget 12-->
-                                <div class="card card-custom gutter-b text-center bg-primary">
+                                <div class="card card-custom gutter-b text-center bg-primary box-information">
                                     <div class="card-body ">
                                         <span class="svg-icon svg-icon-3x svg-icon-white ">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
@@ -642,7 +848,7 @@
                             <?php if ($page[0]->status_maintenance_announcement == 1) { ?>
                             <div class="col-xl-6 col-6">
                                 <!--begin::Tiles Widget 12-->
-                                <div class="card card-custom gutter-b text-center bg-dark-o-90">
+                                <div class="card card-custom gutter-b text-center bg-dark-o-90 box-information">
                                     <div class="card-body">
                                         <span class="svg-icon svg-icon-3x svg-icon-dark">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
@@ -671,7 +877,7 @@
                             <?php } else { ?>
                             <div class="col-xl-6 col-6">
                                 <!--begin::Tiles Widget 12-->
-                                <div class="card card-custom gutter-b text-center bg-primary">
+                                <div class="card card-custom gutter-b text-center bg-primary box-information">
                                     <div class="card-body">
                                         <span class="svg-icon svg-icon-3x svg-icon-white">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
@@ -701,7 +907,7 @@
                             <?php } ?>
                             <div class="col-xl-6 col-6">
                                 <!--begin::Tiles Widget 12-->
-                                <div class="card card-custom gutter-b text-center bg-primary">
+                                <div class="card card-custom gutter-b text-center bg-primary box-information">
                                     <div class="card-body">
                                         <span class="svg-icon svg-icon-3x svg-icon-white">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
@@ -1061,6 +1267,24 @@
     <!--begin::Page Scripts(used by this page)-->
     <script
         src="<?php echo base_url(); ?>assets/students/dist/assets/plugins/custom/whatsappchat/whatsapp-chat-support.js">
+    </script>
+    <script>
+    const slider = document.getElementById("slider");
+    const cards = document.querySelectorAll(".slider-card");
+    const cardWidth = cards[0].offsetWidth;
+    let index = 0;
+
+    function slideNext() {
+        index = (index + 1) % cards.length;
+        slider.style.transform = `translateX(-${index * cardWidth}px)`;
+    }
+
+    setInterval(slideNext, 3000);
+
+    window.addEventListener('resize', () => {
+        const newWidth = cards[0].offsetWidth;
+        slider.style.transform = `translateX(-${index * newWidth}px)`;
+    });
     </script>
     <?php if ($status_student[0]->status_update_biodata == 1) { ?>
     <script>

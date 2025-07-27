@@ -81,7 +81,7 @@ class DashboardModel extends CI_Model {
 
         $this->db->select('*');
         $this->db->where('nomor_siswa', $number);
-        $this->db->where("DATE_FORMAT(inserted_at,'%Y-%m')", $date);
+        $this->db->where("DATE_FORMAT(inserted_at,'%Y')", $date);
         $sql = $this->db->get($this->table_payment_du);
         return $sql->result();
     }

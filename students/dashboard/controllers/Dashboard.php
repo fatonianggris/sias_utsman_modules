@@ -32,8 +32,8 @@ class Dashboard extends MX_Controller
         $data['students_config'] = $this->DashboardModel->get_students_config();
         $data['schoolyear'] = $this->DashboardModel->get_schoolyear_now();
         $data['total_students'] = $this->DashboardModel->get_total_presence($this->user_students[0]->id_siswa, $data['schoolyear'][0]->id_tahun_ajaran);
-        $data['status_payment'] = $this->DashboardModel->get_status_payment_dpb($this->user_students[0]->nomor_pembayaran_dpb, date("Y-m"));
-        $data['status_payment_du'] = $this->DashboardModel->get_status_payment_du($this->user_students[0]->nomor_pembayaran_du, date("Y-m"));
+        $data['status_payment_dpb'] = $this->DashboardModel->get_status_payment_dpb($this->user_students[0]->nomor_pembayaran_dpb, date("Y-m"));
+        $data['status_payment_du'] = $this->DashboardModel->get_status_payment_du($this->user_students[0]->nomor_pembayaran_du, date("Y"));
         $data['status_student'] = $this->DashboardModel->get_status_student($this->user_students[0]->id_siswa);
         $data['one_signal'] = $this->DashboardModel->get_third_party_key(); //?
 

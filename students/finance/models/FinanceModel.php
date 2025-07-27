@@ -22,8 +22,7 @@ class FinanceModel extends CI_Model
 
     public function get_schoolyear_all()
     {
-        $this->db->select('*');
-
+        $this->db->select('tahun_awal, MIN(inserted_at) as inserted_at');
         $this->db->order_by('inserted_at', 'ASC');
         $this->db->group_by('tahun_awal');
 
