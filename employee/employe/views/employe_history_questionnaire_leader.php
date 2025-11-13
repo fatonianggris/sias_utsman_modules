@@ -33,11 +33,8 @@
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
         <div class="container">
-            <!--begin::Notice-->
-            <?php echo $this->session->flashdata('flash_message'); ?>
-            <!--end::Notice-->
             <div class="row">
-                <div class="col-xl-5">
+                <div class="col-xl-4">
                     <!--begin::Card-->
                     <div class="card card-custom" style="height: 150px;">
                         <!--begin::Body-->
@@ -48,9 +45,9 @@
                                     <a href="#" class="font-weight-bolder font-size-h4 text-dark-75 text-hover-primary mt-2">
                                         <?php echo strtoupper(strtolower($questionnaire[0]->nama_kuisioner)); ?><br>
                                         <?php if (@$result_eval[0]->hasil_nilai_atasan >= 1) { ?>
-                                            <span class="label label-sm label-light-success label-inline font-weight-bolder mr-2">TELAH DIISI</span>
+                                            <span class="label label-md label-light-success label-inline font-weight-bolder mr-2">SUDAH DINILAI</span>
                                         <?php } else { ?>
-                                            <span class="label label-sm label-light-danger label-inline font-weight-bolder mr-2">BELUM DIISI</span>
+                                            <span class="label label-md label-light-danger label-inline font-weight-bolder mr-2">BELUM DINILAI</span>
                                         <?php } ?>
                                     </a>
                                     <div class="text-warning font-size-sm mt-2 font-weight-bold">
@@ -91,11 +88,37 @@
                             </div>
                             <!--end::Tiles Widget 11-->
                         </div>
-
                     </div>
-
                 </div>
-                <div class="col-xl-5">
+                <!--begin::Content-->
+                <div class=" col-xl-2">
+                    <div class="row">
+                        <div class="col-xl-12 col-6">
+                            <!--begin::Tiles Widget 11-->
+                            <div class="card card-custom bg-danger gutter-b" style="height: 150px">
+                                <div class="card-body">
+                                    <span class="svg-icon svg-icon-3x svg-icon-white ml-n2">
+                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <rect fill="#000000" opacity="0.3" x="7" y="4" width="10" height="4" />
+                                                <path d="M7,2 L17,2 C18.1045695,2 19,2.8954305 19,4 L19,20 C19,21.1045695 18.1045695,22 17,22 L7,22 C5.8954305,22 5,21.1045695 5,20 L5,4 C5,2.8954305 5.8954305,2 7,2 Z M8,12 C8.55228475,12 9,11.5522847 9,11 C9,10.4477153 8.55228475,10 8,10 C7.44771525,10 7,10.4477153 7,11 C7,11.5522847 7.44771525,12 8,12 Z M8,16 C8.55228475,16 9,15.5522847 9,15 C9,14.4477153 8.55228475,14 8,14 C7.44771525,14 7,14.4477153 7,15 C7,15.5522847 7.44771525,16 8,16 Z M12,12 C12.5522847,12 13,11.5522847 13,11 C13,10.4477153 12.5522847,10 12,10 C11.4477153,10 11,10.4477153 11,11 C11,11.5522847 11.4477153,12 12,12 Z M12,16 C12.5522847,16 13,15.5522847 13,15 C13,14.4477153 12.5522847,14 12,14 C11.4477153,14 11,14.4477153 11,15 C11,15.5522847 11.4477153,16 12,16 Z M16,12 C16.5522847,12 17,11.5522847 17,11 C17,10.4477153 16.5522847,10 16,10 C15.4477153,10 15,10.4477153 15,11 C15,11.5522847 15.4477153,12 16,12 Z M16,16 C16.5522847,16 17,15.5522847 17,15 C17,14.4477153 16.5522847,14 16,14 C15.4477153,14 15,14.4477153 15,15 C15,15.5522847 15.4477153,16 16,16 Z M16,20 C16.5522847,20 17,19.5522847 17,19 C17,18.4477153 16.5522847,18 16,18 C15.4477153,18 15,18.4477153 15,19 C15,19.5522847 15.4477153,20 16,20 Z M8,18 C7.44771525,18 7,18.4477153 7,19 C7,19.5522847 7.44771525,20 8,20 L12,20 C12.5522847,20 13,19.5522847 13,19 C13,18.4477153 12.5522847,18 12,18 L8,18 Z M7,4 L7,8 L17,8 L17,4 L7,4 Z" fill="#000000" />
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                                    <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3 blink-hard">
+                                        <?php echo $result_eval[0]->jumlah_nilai_atasan; ?>
+                                    </div>
+                                    <a href="#" class="text-white font-weight-bold font-size-md mt-1">Total Penilaian</a>
+                                </div>
+                            </div>
+                            <!--end::Tiles Widget 11-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4">
                     <!--begin::Tiles Widget 13-->
                     <div class="card card-custom bgi-no-repeat gutter-b"
                         style="height: 150px; background-color: #FFFFFF; background-position: calc(100% + 0.5rem) 100%; background-size: 100% auto;">
@@ -130,8 +153,8 @@
                     <!--begin::Card-->
                     <div class="card card-custom example example-compact py-3" id="kt_form">
                         <div class="card-header card-title pt-2" style="justify-content: center">
-                            <h2 class="card-label font-size-h2 text-center font-weight-bolder">KUISIONER PENILAIAN ATASAN
-                                <span class="text-warning pt-2 font-size-h6 font-weight-bolder d-block"><b class="text-dark-75">PEGAWAI YANG DINILAI </b> "<?php echo strtoupper(strtolower($id_dinilai[0]->nama_lengkap)); ?>"-(<?php echo (($id_dinilai[0]->nip)); ?>)</span>
+                            <h2 class="card-label font-size-h2 text-center font-weight-bolder">HASIL PENILAIAN KUISIONER ATASAN
+                                <span class="text-primary pt-2 font-size-h6 font-weight-bolder d-block"><b class="text-dark-75"></b> "<?php echo strtoupper(strtolower($id_penilai[0]->nama_lengkap)); ?>"-(<?php echo (($id_penilai[0]->nip)); ?>) MENILAI "<?php echo strtoupper(strtolower($id_dinilai[0]->nama_lengkap)); ?>"-(<?php echo (($id_dinilai[0]->nip)); ?>)</span>
                                 <div class="text-center mt-2">
                                     <div class="align-items-center font-size-sm">
                                         <span class="label label-sm label-light-success label-inline font-weight-bolder mr-2"><?php echo TanggalIndo(($questionnaire[0]->tgl_mulai)); ?></span>
@@ -142,69 +165,58 @@
                             </h2>
                         </div>
                         <!--begin::Form-->
-                        <form class="form" method="POST" action="<?php echo site_url('employee/employe/report/post_evaluation_questionnaire_leader/' . paramEncrypt($questionnaire[0]->id_kuisioner) . "/" . paramEncrypt($id_dinilai[0]->id_pegawai)); ?>" enctype="multipart/form-data" id="kt_form_eval_question">
-                            <input type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-                            <div class="card-body">
+                        <div class="card-body">
+                            <div class="mb-0">
                                 <div class="mb-0">
-                                    <div class="mb-0">
-                                        <div class=" row fv-plugins-icon-container ">
-                                            <div class="col-lg-1 text-right">
-                                                <label class="font-weight-bolder font-size-h5 ">No.</label>
-                                            </div>
-                                            <div class="col-lg-9 text-center">
-                                                <label class="font-weight-bolder font-size-h5 ">KOMPETENSI</label>
-                                            </div>
-                                            <div class="col-lg-2 text-center">
-                                                <label class="font-weight-bolder font-size-h5 ">NILAI</label>
-                                            </div>
+                                    <div class=" row fv-plugins-icon-container ">
+                                        <div class="col-lg-1 text-right">
+                                            <label class="font-weight-bolder font-size-h5 ">No.</label>
                                         </div>
-                                        <?php
-                                        $no = 1;
-                                        if (!empty($question_type)) {
-                                            foreach ($question_type as $key => $value_type) {
-                                        ?>
-                                                <div class="alert alert-warning font-size-h6 font-weight-bolder text-left pl-10" role="alert">
-                                                    <?php echo strtoupper($value_type->nama_tipe_pertanyaan); ?>
-                                                </div>
-                                                <?php
-                                                if (!empty($question)) {
-                                                    foreach ($question as $key => $value) {
-                                                        if ($value->tipe_pertanyaan == $value_type->id_tipe_pertanyaan) {
-                                                ?>
-                                                            <div class="form-group row fv-plugins-icon-container ">
-                                                                <div class="col-lg-1 text-right">
-                                                                    <label class="font-weight-bolder font-size-h3"><?php echo $no . "."; ?></label>
-                                                                </div>
-                                                                <div class="col-lg-9 text-left">
-                                                                    <span class="form-text text-danger"><?php echo $value->deskripsi_pertanyaan; ?></span>
-                                                                    <textarea name="isi[]" class="form-control form-control-lg font-weight-bold" style="resize: none;" rows="3" readonly=""><?php echo ucfirst(strtolower($value->isi_pertanyaan)); ?></textarea>
-                                                                    <input type="hidden" class="hidden" name="soal[]" value="<?php echo $value->id_pertanyaan; ?>">
-
-                                                                </div>
-                                                                <div class="col-lg-2 text-center">
-                                                                    <input type="text" name="jawaban[]" class="form-control form-control-lg" placeholder="Isikan Nilai">
-                                                                    <span class="form-text text-dark"><b class="text-danger">*WAJIB DIISI, </b>antara 1-<?php echo $questionnaire[0]->nilai_penilaian_max; ?></span>
-                                                                </div>
+                                        <div class="col-lg-9 text-center">
+                                            <label class="font-weight-bolder font-size-h5 ">KOMPETENSI</label>
+                                        </div>
+                                        <div class="col-lg-2 text-center">
+                                            <label class="font-weight-bolder font-size-h5 ">NILAI</label>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    $no = 1;
+                                    if (!empty($question_type)) {
+                                        foreach ($question_type as $key => $value_type) {
+                                    ?>
+                                            <div class="alert alert-warning font-size-h6 font-weight-bolder text-left pl-10" role="alert">
+                                                <?php echo strtoupper($value_type->nama_tipe_pertanyaan); ?>
+                                            </div>
+                                            <?php
+                                            if (!empty($question)) {
+                                                foreach ($question as $key => $value) {
+                                                    if ($value->tipe_pertanyaan == $value_type->id_tipe_pertanyaan) {
+                                            ?>
+                                                        <div class="form-group row fv-plugins-icon-container ">
+                                                            <div class="col-lg-1 text-right">
+                                                                <label class="font-weight-bolder font-size-h3"><?php echo $no . "."; ?></label>
                                                             </div>
-                                                <?php
-                                                            $no++;
-                                                        }
+                                                            <div class="col-lg-9 text-left">
+                                                                <span class="form-text text-danger form-control-lg"><?php echo $value->deskripsi_pertanyaan; ?></span>
+                                                                <textarea name="isi[]" class="form-control form-control-md font-weight-bold form-control-solid" style="resize: none;" rows="3" readonly=""><?php echo ucfirst(strtolower($value->isi_pertanyaan)); ?></textarea>
+                                                            </div>
+                                                            <div class="col-lg-2 text-center">
+                                                                <input type="text" name="jawaban[]" class="form-control form-control-lg font-weight-bold  form-control-solid" placeholder="Isikan Nilai" value="<?php echo $value->isi_jawaban; ?>" readonly>
+
+                                                            </div>
+                                                        </div>
+                                            <?php
+                                                        $no++;
                                                     }
-                                                } ?>
-                                        <?php
-                                            }
-                                        } ?>
-                                    </div>
+                                                }
+                                            } ?>
+                                    <?php
+                                        }
+                                    } ?>
                                 </div>
                             </div>
-                            <div class="card-footer text-left">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <button id="kt_login_signin_submit" class="btn btn-success font-weight-bold px-9 py-4 my-3 mx-4">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
+
                         <!--end::Form-->
                     </div>
                     <!--end::Entry-->

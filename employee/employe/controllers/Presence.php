@@ -143,10 +143,11 @@ class Presence extends MX_Controller
 
 	public function get_data_presence_day()
 	{
-
+		$param = $this->input->post();
+		$data = $this->security->xss_clean($param);
 		// get all raw data
-		$data = $this->PresenceModel->get_present_all_day($this->usr_employee[0]->level_jabatan, $this->usr_employee[0]->level_tingkat);
-
+		$data = $this->PresenceModel->get_present_all_day($this->usr_employee[0]->level_jabatan, $this->usr_employee[0]->level_tingkat, $data['start_date'], $data['end_date']);
+		
 		// count data
 		$totalRecords = $totalDisplay = count($data);
 

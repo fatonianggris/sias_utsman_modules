@@ -51,9 +51,19 @@
 									<!--begin: Search Form-->
 									<div class="mb-2">
 										<div class="row align-items-center">
-											<div class="col-lg-11">
+											<div class="col-lg-8">
 												<form class="mb-5">
+
 													<div class="row mb-6">
+														<div class="col-md-6 my-2 my-md-0">
+															<label>Nama Pegawai:</label>
+															<div class="input-icon">
+																<input type="text" class="form-control datatable-input" placeholder="Cari..." data-col-index="1" />
+																<span>
+																	<i class="flaticon2-search-1 text-muted"></i>
+																</span>
+															</div>
+														</div>
 														<div class="col-lg-3 mb-lg-0 mb-6">
 															<label>Status Masuk:</label>
 															<select class="form-control datatable-input" data-col-index="2">
@@ -74,34 +84,6 @@
 																<option value="">Semua</option>
 															</select>
 														</div>
-														<div class="col-lg-4 mb-lg-0 mb-6">
-															<label>Tanggal Absen:</label>
-															<div class="input-daterange input-group" id="kt_datepicker_table">
-																<input type="text" class="form-control datatable-input" name="start" placeholder="From" data-col-index="8" />
-																<div class="input-group-append">
-																	<span class="input-group-text">
-																		<i class="la la-ellipsis-h"></i>
-																	</span>
-																</div>
-																<input type="text" class="form-control datatable-input" name="end" placeholder="To" data-col-index="8" />
-															</div>
-														</div>
-														<div class="col-lg-2 mb-lg-0 mb-6">
-															<label>Tahun Ajaran:</label>
-															<select class="form-control datatable-input" data-col-index="9">
-																<option value="">Tahun Ajaran</option>
-																<?php
-																if (!empty($schoolyear)) {
-																	foreach ($schoolyear as $key => $value_sch) {
-																?>
-																		<option value="<?php echo $value_sch->tahun_awal . '-' . $value_sch->tahun_akhir; ?>"><?php echo strtoupper($value_sch->tahun_awal . '-' . $value_sch->tahun_akhir); ?></option>
-																<?php
-																	}
-																}
-																?>
-																<option value="">SEMUA</option>
-															</select>
-														</div>
 													</div>
 													<div class="row mt-5">
 														<div class="col-lg-11">
@@ -119,6 +101,16 @@
 														</div>
 													</div>
 												</form>
+											</div>
+											<div class="col-lg-3 mt-20 ">
+												<div class="input-group" id="kt_daterangepicker_6">
+													<div class="input-group-append">
+														<span class="input-group-text"><i
+																class="la la-calendar-check-o"></i></span>
+													</div>
+													<input type="text" class="form-control font-weight-bolder" readonly=""
+														placeholder="Select date range">
+												</div>
 											</div>
 											<div class="col-lg-1 mt-20 text-right">
 												<div class="btn-group">
@@ -150,7 +142,6 @@
 												<th>Status Pulang</th>
 												<th>Telat Pulang</th>
 												<th>Tanggal</th>
-												<th>Tahun Ajaran</th>
 											</tr>
 										</thead>
 									</table>

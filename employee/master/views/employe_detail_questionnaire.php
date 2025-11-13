@@ -39,6 +39,139 @@
             <!--end::Notice-->
 
             <div class="row">
+                <div class="col-xl-4">
+                    <!--begin::Card-->
+                    <div class="card card-custom" style="height: 150px;">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::User-->
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div>
+                                    <a href="#" class="font-weight-bolder font-size-h6 text-dark-75 text-hover-primary">
+                                        <?php echo strtoupper(strtolower($questionnaire[0]->nama_kuisioner)); ?>
+                                    </a>
+                                    <div class="text-danger font-size-xs mt-1 font-weight-bold">
+                                        <?php echo (($questionnaire[0]->deskripsi_kuisioner)); ?>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <div class="d-flex align-items-center mr-2">
+                                            <span class="font-weight-bold font-size-sm mr-2">Mulai</span>
+                                            <span
+                                                class="label label-sm label-light-success label-inline font-weight-bolder"><?php echo TanggalIndo(($questionnaire[0]->tgl_mulai)); ?></span>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <span class="font-weight-bold font-size-sm mr-2">Berakhir</span>
+                                            <span
+                                                class="label label-sm label-light-danger label-inline font-weight-bolder"><?php echo TanggalIndo(($questionnaire[0]->tgl_berakhir)); ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::User-->
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                    <!--end::Card-->
+                </div>
+                <!--end::Aside-->
+                <!--begin::Content-->
+                <div class="col-xl-2">
+                    <div class="row">
+                        <div class="col-xl-12 col-12">
+                            <!--begin::Tiles Widget 11-->
+                            <div class="card card-custom bg-success gutter-b" style="height: 150px">
+                                <div class="card-body">
+                                    <span class="svg-icon svg-icon-3x svg-icon-white ml-n2">
+                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+                                            viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                                <path
+                                                    d="M12,16 C12.5522847,16 13,16.4477153 13,17 C13,17.5522847 12.5522847,18 12,18 C11.4477153,18 11,17.5522847 11,17 C11,16.4477153 11.4477153,16 12,16 Z M10.591,14.868 L10.591,13.209 L11.851,13.209 C13.447,13.209 14.602,11.991 14.602,10.395 C14.602,8.799 13.447,7.581 11.851,7.581 C10.234,7.581 9.121,8.799 9.121,10.395 L7.336,10.395 C7.336,7.875 9.31,5.922 11.851,5.922 C14.392,5.922 16.387,7.875 16.387,10.395 C16.387,12.915 14.392,14.868 11.851,14.868 L10.591,14.868 Z"
+                                                    fill="#000000" />
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                                    <a href="#" data-toggle="modal" data-target="#modal_pertanyaan_questionnaire" class="btn btn-light btn-sm text-success font-weight-bold ml-2">Lihat Soal</a>
+                                    <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">
+                                        <?php echo $total_question[0]->total_pertanyaan; ?>
+                                    </div>
+                                    <a href="#" class="text-white font-weight-bold font-size-md mt-1">Total
+                                        Pertanyaan</a>
+                                </div>
+                            </div>
+                            <!--end::Tiles Widget 11-->
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Content-->
+                <div class="col-xl-2">
+                    <div class="row">
+                        <div class="col-xl-12 col-12">
+                            <!--begin::Tiles Widget 11-->
+                            <div class="card card-custom bg-warning gutter-b" style="height: 150px">
+                                <div class="card-body">
+                                    <span class="svg-icon svg-icon-3x svg-icon-white ml-n2">
+                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+                                            viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <polygon fill="#000000" opacity="0.3" points="5 15 3 21.5 9.5 19.5" />
+                                                <path
+                                                    d="M13.5,21 C8.25329488,21 4,16.7467051 4,11.5 C4,6.25329488 8.25329488,2 13.5,2 C18.7467051,2 23,6.25329488 23,11.5 C23,16.7467051 18.7467051,21 13.5,21 Z M8.5,13 C9.32842712,13 10,12.3284271 10,11.5 C10,10.6715729 9.32842712,10 8.5,10 C7.67157288,10 7,10.6715729 7,11.5 C7,12.3284271 7.67157288,13 8.5,13 Z M13.5,13 C14.3284271,13 15,12.3284271 15,11.5 C15,10.6715729 14.3284271,10 13.5,10 C12.6715729,10 12,10.6715729 12,11.5 C12,12.3284271 12.6715729,13 13.5,13 Z M18.5,13 C19.3284271,13 20,12.3284271 20,11.5 C20,10.6715729 19.3284271,10 18.5,10 C17.6715729,10 17,10.6715729 17,11.5 C17,12.3284271 17.6715729,13 18.5,13 Z"
+                                                    fill="#000000" />
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                                    <div class="text-inverse-success font-weight-bolder mt-4">
+                                        <a href="#" data-toggle="modal" data-target="#modal_keterangan_questionnaire"
+                                            class="btn btn-light text-warning font-weight-bold mr-2">Lihat
+                                            Keterangan</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--end::Tiles Widget 11-->
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-xl-4">
+                    <!--begin::Tiles Widget 13-->
+                    <div class="card card-custom bgi-no-repeat gutter-b"
+                        style="height: 150px; background-color: #FFFFFF; background-position: calc(100% + 0.5rem) 100%; background-size: 100% auto;">
+                        <!--begin::Body-->
+                        <div class="card-body align-items-center">
+                            <div>
+                                <div class="d-flex justify-content-center">
+                                    <p class="text-dark-75 font-weight-bolder font-size-h4">Tipe Pertanyaan
+                                    </p>
+                                </div>
+                                <div class="d-flex flex-wrap justify-content-center">
+                                    <?php
+                                    if (!empty($question_type)) {
+                                        foreach ($question_type as $key => $value) {
+                                    ?>
+                                            <a href="#"
+                                                class="label font-weight-bold label-default label-md label-inline mr-2 mt-1"
+                                                data-toggle="" aria-haspopup="true" aria-expanded="false">
+                                                <?php echo strtoupper($value->nama_tipe_pertanyaan); ?>
+                                            </a>
+                                    <?php }
+                                    } ?>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                    <!--end::Tiles Widget 13-->
+                </div>
                 <div class="col-xl-12">
                     <!--begin::Card-->
                     <div class="card card-custom gutter-b">
@@ -95,7 +228,7 @@
                                 <!-- Kanan -->
                                 <div class="col-xl-5 d-flex align-items-center justify-content-between">
                                     <div class="text-center">
-                                        <p class="text-dark-75 font-weight-bolder font-size-h4">STATUS NILAI ANDA</p>
+                                        <p class="text-dark-75 font-weight-bolder font-size-h4">STATUS NILAI PEGAWAI</p>
                                         <?php if (
                                             ($questionnaire[0]->jumlah_personal_penilai == $questionnaire[0]->total_hasil_personal_penilai) &&
                                             ($questionnaire[0]->jumlah_sejawat_penilai == $questionnaire[0]->total_hasil_sejawat_penilai) &&
@@ -272,7 +405,16 @@
                                         <span class="font-weight-bolder font-size-sm">Total Nilai</span>
                                         <span class="font-weight-bolder font-size-h5"><span
                                                 class="text-warning font-weight-bold"></span>
-                                            <?php echo $get_result_personal[0]->total_nilai_personal + $get_result_colleague[0]->total_nilai_sejawat + $get_result_leader[0]->total_nilai_atasan + $get_result_subordinate[0]->total_nilai_bawahan; ?>
+                                            <?php if (
+                                                ($questionnaire[0]->jumlah_personal_penilai == $questionnaire[0]->total_hasil_personal_penilai) &&
+                                                ($questionnaire[0]->jumlah_sejawat_penilai == $questionnaire[0]->total_hasil_sejawat_penilai) &&
+                                                ($questionnaire[0]->jumlah_atasan_penilai == $questionnaire[0]->total_hasil_atasan_penilai) &&
+                                                ($questionnaire[0]->jumlah_bawahan_penilai == $questionnaire[0]->total_hasil_bawahan_penilai)
+                                            ) { ?>
+                                                <?php echo $get_result_personal[0]->total_nilai_personal + $get_result_colleague[0]->total_nilai_sejawat + $get_result_leader[0]->total_nilai_atasan + $get_result_subordinate[0]->total_nilai_bawahan; ?>
+                                            <?php } else { ?>
+                                                <?php echo '0'; ?>
+                                            <?php } ?>
                                         </span>
                                     </div>
                                 </div>
@@ -287,8 +429,18 @@
                                             Rata-Rata</span>
                                         <span class="font-weight-bolder font-size-h5 text-success"><span
                                                 class="text-success font-weight-bold"></span>
-                                            <?php echo round($final_result, 1) ?>
+                                            <?php if (
+                                                ($questionnaire[0]->jumlah_personal_penilai == $questionnaire[0]->total_hasil_personal_penilai) &&
+                                                ($questionnaire[0]->jumlah_sejawat_penilai == $questionnaire[0]->total_hasil_sejawat_penilai) &&
+                                                ($questionnaire[0]->jumlah_atasan_penilai == $questionnaire[0]->total_hasil_atasan_penilai) &&
+                                                ($questionnaire[0]->jumlah_bawahan_penilai == $questionnaire[0]->total_hasil_bawahan_penilai)
+                                            ) { ?>
+                                                <?php echo round($final_result, 1); ?>
+                                            <?php } else { ?>
+                                                <?php echo $final_result; ?>
+                                            <?php } ?>
                                         </span>
+
                                     </div>
                                 </div>
                                 <!--end: Item-->
@@ -300,140 +452,155 @@
                     </div>
                     <!--end::Card-->
                 </div>
-                <div class="col-xl-4">
-                    <!--begin::Card-->
-                    <div class="card card-custom" style="height: 150px;">
-                        <!--begin::Body-->
-                        <div class="card-body">
-                            <!--begin::User-->
-                            <div class="d-flex align-items-center justify-content-center">
-                                <div>
-                                    <a href="#" class="font-weight-bolder font-size-h6 text-dark-75 text-hover-primary">
-                                        <?php echo strtoupper(strtolower($questionnaire[0]->nama_kuisioner)); ?>
-                                    </a>
-                                    <div class="text-danger font-size-xs mt-1 font-weight-bold">
-                                        <?php echo (($questionnaire[0]->deskripsi_kuisioner)); ?>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-2">
-                                        <div class="d-flex align-items-center mr-2">
-                                            <span class="font-weight-bold font-size-sm mr-2">Mulai</span>
-                                            <span
-                                                class="label label-sm label-light-success label-inline font-weight-bolder"><?php echo TanggalIndo(($questionnaire[0]->tgl_mulai)); ?></span>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <span class="font-weight-bold font-size-sm mr-2">Berakhir</span>
-                                            <span
-                                                class="label label-sm label-light-danger label-inline font-weight-bolder"><?php echo TanggalIndo(($questionnaire[0]->tgl_berakhir)); ?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::User-->
-                        </div>
-                        <!--end::Body-->
-                    </div>
-                    <!--end::Card-->
-                </div>
-                <!--end::Aside-->
-                <!--begin::Content-->
-                <div class="col-xl-2">
-                    <div class="row">
-                        <div class="col-xl-12 col-12">
-                            <!--begin::Tiles Widget 11-->
-                            <div class="card card-custom bg-success gutter-b" style="height: 150px">
-                                <div class="card-body">
-                                    <span class="svg-icon svg-icon-3x svg-icon-white ml-n2">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                                <path
-                                                    d="M12,16 C12.5522847,16 13,16.4477153 13,17 C13,17.5522847 12.5522847,18 12,18 C11.4477153,18 11,17.5522847 11,17 C11,16.4477153 11.4477153,16 12,16 Z M10.591,14.868 L10.591,13.209 L11.851,13.209 C13.447,13.209 14.602,11.991 14.602,10.395 C14.602,8.799 13.447,7.581 11.851,7.581 C10.234,7.581 9.121,8.799 9.121,10.395 L7.336,10.395 C7.336,7.875 9.31,5.922 11.851,5.922 C14.392,5.922 16.387,7.875 16.387,10.395 C16.387,12.915 14.392,14.868 11.851,14.868 L10.591,14.868 Z"
-                                                    fill="#000000" />
-                                            </g>
-                                        </svg>
-                                        <!--end::Svg Icon-->
-                                    </span>
-                                    <a href="#" data-toggle="modal" data-target="#modal_pertanyaan_questionnaire" class="btn btn-light btn-sm text-success font-weight-bold ml-2">Lihat Soal</a>
-                                    <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">
-                                        <?php echo $total_question[0]->total_pertanyaan; ?>
-                                    </div>
-                                    <a href="#" class="text-white font-weight-bold font-size-md mt-1">Total
-                                        Pertanyaan</a>
-                                </div>
-                            </div>
-                            <!--end::Tiles Widget 11-->
-                        </div>
-                    </div>
-                </div>
-                <!--begin::Content-->
-                <div class="col-xl-2">
-                    <div class="row">
-                        <div class="col-xl-12 col-12">
-                            <!--begin::Tiles Widget 11-->
-                            <div class="card card-custom bg-warning gutter-b" style="height: 150px">
-                                <div class="card-body">
-                                    <span class="svg-icon svg-icon-3x svg-icon-white ml-n2">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <polygon fill="#000000" opacity="0.3" points="5 15 3 21.5 9.5 19.5" />
-                                                <path
-                                                    d="M13.5,21 C8.25329488,21 4,16.7467051 4,11.5 C4,6.25329488 8.25329488,2 13.5,2 C18.7467051,2 23,6.25329488 23,11.5 C23,16.7467051 18.7467051,21 13.5,21 Z M8.5,13 C9.32842712,13 10,12.3284271 10,11.5 C10,10.6715729 9.32842712,10 8.5,10 C7.67157288,10 7,10.6715729 7,11.5 C7,12.3284271 7.67157288,13 8.5,13 Z M13.5,13 C14.3284271,13 15,12.3284271 15,11.5 C15,10.6715729 14.3284271,10 13.5,10 C12.6715729,10 12,10.6715729 12,11.5 C12,12.3284271 12.6715729,13 13.5,13 Z M18.5,13 C19.3284271,13 20,12.3284271 20,11.5 C20,10.6715729 19.3284271,10 18.5,10 C17.6715729,10 17,10.6715729 17,11.5 C17,12.3284271 17.6715729,13 18.5,13 Z"
-                                                    fill="#000000" />
-                                            </g>
-                                        </svg>
-                                        <!--end::Svg Icon-->
-                                    </span>
-                                    <div class="text-inverse-success font-weight-bolder mt-4">
-                                        <a href="#" data-toggle="modal" data-target="#modal_keterangan_questionnaire"
-                                            class="btn btn-light text-warning font-weight-bold mr-2">Lihat
-                                            Keterangan</a>
-                                    </div>
 
-                                </div>
-                            </div>
-                            <!--end::Tiles Widget 11-->
-                        </div>
-                    </div>
-                </div>
-                <div class=" col-xl-4">
-                    <!--begin::Tiles Widget 13-->
-                    <div class="card card-custom bgi-no-repeat gutter-b"
-                        style="height: 150px; background-color: #FFFFFF; background-position: calc(100% + 0.5rem) 100%; background-size: 100% auto;">
-                        <!--begin::Body-->
-                        <div class="card-body align-items-center">
-                            <div>
-                                <div class="d-flex justify-content-center">
-                                    <p class="text-dark-75 font-weight-bolder font-size-h4">Tipe Pertanyaan
-                                    </p>
-                                </div>
-                                <div class="d-flex flex-wrap justify-content-center">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-3">
+                            <!--begin::Engage Widget 2-->
+                            <div class="card card-custom mb-7">
+                                <div class="card-body d-flex p-0">
                                     <?php
-                                    if (!empty($question_type)) {
-                                        foreach ($question_type as $key => $value) {
-                                    ?>
-                                            <a href="#"
-                                                class="label font-weight-bold label-default label-md label-inline mr-2 mt-1"
-                                                data-toggle="" aria-haspopup="true" aria-expanded="false">
-                                                <?php echo strtoupper($value->nama_tipe_pertanyaan); ?>
-                                            </a>
-                                    <?php }
+                                    $bg_person = '';
+                                    if ($questionnaire[0]->total_hasil_personal_penilai == $questionnaire[0]->jumlah_personal_penilai) {
+                                        $bg_person = 'bg-success';
+                                    } else {
+                                        $bg_person = 'bg-danger';
                                     } ?>
+                                    <div class="flex-grow-1 <?php echo $bg_person; ?> p-5 card-rounded flex-grow-1 bgi-no-repeat"
+                                        style="height: 176px; background-position: calc(100% + 0.8rem) bottom;background-size: auto 50%; background-image: url(<?php echo base_url(); ?>assets/employee/dist/assets/media/svg/icons/Communication/Clipboard-list.svg);">
+                                        <h4 class="text-inverse-danger font-weight-bolder">Daftar Hasil
+                                            Nilai Personal Pegawai</h4>
+                                        <div
+                                            class="text-inverse-success font-weight-bolder font-size-h2 mt-2">
+                                            <?php echo $questionnaire[0]->total_hasil_personal_penilai; ?>/<?php echo $questionnaire[0]->jumlah_personal_penilai; ?>
+                                        </div>
+                                        <div class="text-inverse-success font-weight-bolder mt-2">
+                                            <?php
+                                            if ($questionnaire[0]->jumlah_personal_penilai != 0) { ?>
+                                                <a href="<?php echo site_url('employee/master/questionnaire/list_evaluation_employee_personal_assesed/' . paramEncrypt($employee[0]->id_pegawai) . '/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
+                                                    class="btn btn-light text-dark font-weight-bold mr-2">Lihat
+                                                    Daftar</a>
+                                            <?php  } else { ?>
+                                                <button class="btn btn-dark font-weight-bolder mr-2"
+                                                    disabled>Tidak Dinilai</button>
+                                            <?php } ?>
+                                        </div>
+                                        <p class="text-inverse-danger font-weight-bolder">*klik lihat
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!--end::Body-->
+                        <div class="col-lg-3 col-3">
+                            <!--begin::Engage Widget 2-->
+                            <div class="card card-custom mb-7">
+                                <div class="card-body d-flex p-0">
+                                    <?php
+                                    $bg_sejawat = '';
+                                    if ($questionnaire[0]->total_hasil_sejawat_penilai == $questionnaire[0]->jumlah_sejawat_penilai) {
+                                        $bg_sejawat = 'bg-success';
+                                    } else {
+                                        $bg_sejawat = 'bg-danger';
+                                    } ?>
+                                    <div class="flex-grow-1 <?php echo $bg_sejawat; ?> p-5 card-rounded flex-grow-1 bgi-no-repeat"
+                                        style="height: 176px; background-position: calc(100% + 0.8rem) bottom;background-size: auto 50%; background-image: url(<?php echo base_url(); ?>assets/employee/dist/assets/media/svg/icons/Communication/Clipboard-list.svg);">
+                                        <h4 class="text-inverse-danger font-weight-bolder">Daftar Hasil
+                                            Nilai Sejawat Pegawai</h4>
+                                        <div
+                                            class="text-inverse-success font-weight-bolder font-size-h2 mt-2">
+                                            <?php echo $questionnaire[0]->total_hasil_sejawat_penilai; ?>/<?php echo $questionnaire[0]->jumlah_sejawat_penilai; ?>
+                                        </div>
+                                        <div class="text-inverse-success font-weight-bolder mt-2">
+                                            <?php
+                                            if ($questionnaire[0]->jumlah_sejawat_penilai != 0) { ?>
+                                                <a href="<?php echo site_url('employee/master/questionnaire/list_evaluation_employee_colleague_assesed/' . paramEncrypt($employee[0]->id_pegawai) . '/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
+                                                    class="btn btn-light text-dark font-weight-bold mr-2">Lihat
+                                                    Daftar</a>
+                                            <?php  } else { ?>
+                                                <button class="btn btn-dark font-weight-bolder mr-2"
+                                                    disabled>Tidak Dinilai</button>
+                                            <?php } ?>
+                                        </div>
+                                        <p class="text-inverse-danger font-weight-bolder">*klik lihat
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-3">
+                            <!--begin::Engage Widget 2-->
+                            <div class="card card-custom mb-7">
+                                <div class="card-body d-flex p-0">
+                                    <?php
+                                    $bg_atas = '';
+                                    if ($questionnaire[0]->total_hasil_atasan_penilai == $questionnaire[0]->jumlah_atasan_penilai) {
+                                        $bg_atas = 'bg-success';
+                                    } else {
+                                        $bg_atas = 'bg-danger';
+                                    } ?>
+                                    <div class="flex-grow-1 <?php echo $bg_atas; ?> p-5 card-rounded flex-grow-1 bgi-no-repeat"
+                                        style="height: 176px; background-position: calc(100% + 0.8rem) bottom;background-size: auto 50%; background-image: url(<?php echo base_url(); ?>assets/employee/dist/assets/media/svg/icons/Communication/Clipboard-list.svg);">
+                                        <h4 class="text-inverse-danger font-weight-bolder">Daftar Hasil
+                                            Nilai Atassan Pegawai</h4>
+                                        <div
+                                            class="text-inverse-success font-weight-bolder font-size-h2 mt-2">
+                                            <?php echo $questionnaire[0]->total_hasil_atasan_penilai; ?>/<?php echo $questionnaire[0]->jumlah_atasan_penilai; ?>
+                                        </div>
+                                        <div class="text-inverse-success font-weight-bolder mt-2">
+                                            <?php
+                                            if ($questionnaire[0]->jumlah_atasan_penilai != 0) { ?>
+                                                <a href="<?php echo site_url('employee/master/questionnaire/list_evaluation_employee_leader_assesed/' . paramEncrypt($employee[0]->id_pegawai) . '/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
+                                                    class="btn btn-light text-dark font-weight-bold mr-2">Lihat
+                                                    Daftar</a>
+                                            <?php  } else { ?>
+                                                <button class="btn btn-dark font-weight-bolder mr-2"
+                                                    disabled>Tidak Dinilai</button>
+                                            <?php } ?>
+                                        </div>
+                                        <p class="text-inverse-danger font-weight-bolder">*klik lihat
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-3">
+                            <!--begin::Engage Widget 2-->
+                            <div class="card card-custom mb-7">
+                                <div class="card-body d-flex p-0">
+                                    <?php
+                                    $bg_bawah = '';
+                                    if ($questionnaire[0]->total_hasil_bawahan_penilai == $questionnaire[0]->jumlah_bawahan_penilai) {
+                                        $bg_bawah = 'bg-success';
+                                    } else {
+                                        $bg_bawah = 'bg-danger';
+                                    } ?>
+                                    <div class="flex-grow-1 <?php echo $bg_bawah; ?> p-5 card-rounded flex-grow-1 bgi-no-repeat"
+                                        style="height: 176px; background-position: calc(100% + 0.8rem) bottom;background-size: auto 50%; background-image: url(<?php echo base_url(); ?>assets/employee/dist/assets/media/svg/icons/Communication/Clipboard-list.svg);">
+                                        <h4 class="text-inverse-danger font-weight-bolder">Daftar Hasil
+                                            Nilai Bawahan Pegawai</h4>
+                                        <div
+                                            class="text-inverse-success font-weight-bolder font-size-h2 mt-2">
+                                            <?php echo $questionnaire[0]->total_hasil_bawahan_penilai; ?>/<?php echo $questionnaire[0]->jumlah_bawahan_penilai; ?>
+                                        </div>
+                                        <div class="text-inverse-success font-weight-bolder mt-2">
+                                            <?php
+                                            if ($questionnaire[0]->jumlah_bawahan_penilai != 0) { ?>
+                                                <a href="<?php echo site_url('employee/master/questionnaire/list_evaluation_employee_subordinate_assesed/' . paramEncrypt($employee[0]->id_pegawai) . '/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
+                                                    class="btn btn-light text-dark font-weight-bold mr-2">Lihat
+                                                    Daftar</a>
+                                            <?php  } else { ?>
+                                                <button class="btn btn-dark font-weight-bolder mr-2"
+                                                    disabled>Tidak Dinilai</button>
+                                            <?php } ?>
+                                        </div>
+                                        <p class="text-inverse-danger font-weight-bolder">*klik lihat
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!--end::Tiles Widget 13-->
                 </div>
-
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-7">
@@ -471,9 +638,8 @@
                                                 </div>
                                                 <div class="d-flex flex-wrap justify-content-center">
                                                     <?php
-
                                                     if (!empty($predicate_value)) {
-                                                        foreach ($predicate_value as $value) {
+                                                        foreach ($predicate_value as $key => $value) {
                                                     ?>
                                                             <a href="#"
                                                                 class="label font-weight-bolder label-primary label-md label-inline mt-1 mr-2"
@@ -481,7 +647,8 @@
                                                                 <?php echo strtoupper($value['label_nilai']); ?>
                                                                 (Min:<?php echo strtoupper($value['nilai_minimal']); ?>,
                                                                 Max:<?php echo strtoupper($value['nilai_maksimal']); ?>,
-                                                                Abjad:<?php echo strtoupper($value['predikat_abjad']); ?>)
+                                                                Abjad:<?php echo strtoupper($value['predikat_abjad']); ?>
+                                                                )
                                                             </a>
                                                     <?php }
                                                     } ?>
@@ -516,7 +683,7 @@
                                                         <div class="text-inverse-success font-weight-bolder mt-2">
                                                             <?php
                                                             if ($questionnaire[0]->jumlah_personal_dinilai != 0) { ?>
-                                                                <a href="<?php echo site_url('employee/employe/report/list_evaluation_employee_personal/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
+                                                                <a href="<?php echo site_url('employee/master/questionnaire/list_evaluation_employee_personal/' . paramEncrypt($employee[0]->id_pegawai) . '/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
                                                                     class="btn btn-light text-dark font-weight-bold mr-2">Lihat
                                                                     Daftar</a>
                                                             <?php  } else { ?>
@@ -552,7 +719,7 @@
                                                         <div class="text-inverse-success font-weight-bolder mt-2">
                                                             <?php
                                                             if ($questionnaire[0]->jumlah_sejawat_dinilai != 0) { ?>
-                                                                <a href="<?php echo site_url('employee/employe/report/list_evaluation_employee_colleague/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
+                                                                <a href="<?php echo site_url('employee/master/questionnaire/list_evaluation_employee_colleague/' . paramEncrypt($employee[0]->id_pegawai) . '/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
                                                                     class="btn btn-light text-dark font-weight-bold mr-2">Lihat
                                                                     Daftar</a>
                                                             <?php  } else { ?>
@@ -588,7 +755,7 @@
                                                         <div class="text-inverse-success font-weight-bolder mt-2">
                                                             <?php
                                                             if ($questionnaire[0]->jumlah_atasan_dinilai != 0) { ?>
-                                                                <a href="<?php echo site_url('employee/employe/report/list_evaluation_employee_leader/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
+                                                                <a href="<?php echo site_url('employee/master/questionnaire/list_evaluation_employee_leader/' . paramEncrypt($employee[0]->id_pegawai) . '/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
                                                                     class="btn btn-light text-dark font-weight-bold mr-2">Lihat
                                                                     Daftar</a>
                                                             <?php  } else { ?>
@@ -624,7 +791,7 @@
                                                         <div class="text-inverse-success font-weight-bolder mt-2">
                                                             <?php
                                                             if ($questionnaire[0]->jumlah_bawahan_dinilai != 0) { ?>
-                                                                <a href="<?php echo site_url('employee/employe/report/list_evaluation_employee_subordinate/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
+                                                                <a href="<?php echo site_url('employee/master/questionnaire/list_evaluation_employee_subordinate/' . paramEncrypt($employee[0]->id_pegawai) . '/' . paramEncrypt($questionnaire[0]->id_kuisioner)); ?>"
                                                                     class="btn btn-light text-dark font-weight-bold mr-2">Lihat
                                                                     Daftar</a>
                                                             <?php  } else { ?>

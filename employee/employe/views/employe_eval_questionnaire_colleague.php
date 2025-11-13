@@ -47,10 +47,10 @@
                                 <div>
                                     <a href="#" class="font-weight-bolder font-size-h4 text-dark-75 text-hover-primary mt-2">
                                         <?php echo strtoupper(strtolower($questionnaire[0]->nama_kuisioner)); ?><br>
-                                        <?php if (@$result_eval[0]->hasil_nilai_atasan >= 1) { ?>
-                                            <span class="label label-sm label-light-success label-inline font-weight-bolder mr-2">TELAH DIISI</span>
+                                        <?php if (@$result_eval[0]->hasil_nilai_sejawat >= 1) { ?>
+                                            <span class="label label-md label-light-success label-inline font-weight-bolder mr-2">SUDAH DINILAI</span>
                                         <?php } else { ?>
-                                            <span class="label label-sm label-light-danger label-inline font-weight-bolder mr-2">BELUM DIISI</span>
+                                            <span class="label label-md label-light-danger label-inline font-weight-bolder mr-2">BELUM DINILAI</span>
                                         <?php } ?>
                                     </a>
                                     <div class="text-warning font-size-sm mt-2 font-weight-bold">
@@ -130,8 +130,8 @@
                     <!--begin::Card-->
                     <div class="card card-custom example example-compact py-3" id="kt_form">
                         <div class="card-header card-title pt-2" style="justify-content: center">
-                            <h2 class="card-label font-size-h2 text-center font-weight-bolder">KUISIONER PENILAIAN ATASAN
-                                <span class="text-warning pt-2 font-size-h6 font-weight-bolder d-block"><b class="text-dark-75">PEGAWAI YANG DINILAI </b> "<?php echo strtoupper(strtolower($id_dinilai[0]->nama_lengkap)); ?>"-(<?php echo (($id_dinilai[0]->nip)); ?>)</span>
+                            <h2 class="card-label font-size-h2 text-center font-weight-bolder">KUISIONER PENILAIAN OLEH SEJAWAT
+                                <span class="text-warning pt-2 font-size-h6 font-weight-bolder d-block"><b class="text-dark-75">SEJAWAT YANG DINILAI </b> "<?php echo strtoupper(strtolower($id_dinilai[0]->nama_lengkap)); ?>"-(<?php echo (($id_dinilai[0]->nip)); ?>)</span>
                                 <div class="text-center mt-2">
                                     <div class="align-items-center font-size-sm">
                                         <span class="label label-sm label-light-success label-inline font-weight-bolder mr-2"><?php echo TanggalIndo(($questionnaire[0]->tgl_mulai)); ?></span>
@@ -142,7 +142,7 @@
                             </h2>
                         </div>
                         <!--begin::Form-->
-                        <form class="form" method="POST" action="<?php echo site_url('employee/employe/report/post_evaluation_questionnaire_leader/' . paramEncrypt($questionnaire[0]->id_kuisioner) . "/" . paramEncrypt($id_dinilai[0]->id_pegawai)); ?>" enctype="multipart/form-data" id="kt_form_eval_question">
+                        <form class="form" method="POST" action="<?php echo site_url('employee/employe/report/post_evaluation_questionnaire_colleague/' . paramEncrypt($questionnaire[0]->id_kuisioner) . "/" . paramEncrypt($id_dinilai[0]->id_pegawai)); ?>" enctype="multipart/form-data" id="kt_form_eval_question">
                             <input type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                             <div class="card-body">
                                 <div class="mb-0">
